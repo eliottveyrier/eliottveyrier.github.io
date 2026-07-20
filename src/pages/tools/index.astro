@@ -1,0 +1,31 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const tools = [
+    {
+        title: "Converters",
+        description: "Convert timecode, frame rates, and more.",
+        href: "/tools/converters",
+    },
+    {
+        title: "Powershell",
+        description: "A collection of useful powershell scripts for music-making.",
+        href: "/tools/powershell",
+    }
+]
+---
+
+
+<MainLayout title="Tools">
+    <h1>Tools</h1>
+    <ul>
+        {tools.map((tool) => (
+            <li>
+                <a href={tool.href}>
+                    {tool.title}
+                </a>
+                <p>{tool.description}</p>
+            </li>
+        ))}
+    </ul>
+</MainLayout>

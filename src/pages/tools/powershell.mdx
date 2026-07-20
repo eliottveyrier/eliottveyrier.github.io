@@ -1,0 +1,24 @@
+
+import MainLayout from "../../layouts/MainLayout.astro";
+import MarkdownContainer from "../../components/MarkdownContainer.astro";
+
+<MainLayout title="Tools" showNavbar={true}>
+    <MarkdownContainer>
+    ## Powershell
+
+    Linux has a beautiful bash, but most music software doesn't have linux support. Mac is quite proprietary. 
+    Windows... has powershell.
+    If you are one of the few windows users in the music-making sphere, you might find this bag of tricks useful.
+    
+    If you fall in that category you should also install **ffmpeg**. You can download it from [here](https://ffmpeg.org/).
+
+    ### Removing prefixes from files
+
+    Importing or moving stems often generates a lot of files with a prefix in their name. 
+    This is a simple one liner to remove it from all files in the current directory.
+    ```powershell
+        Get-ChildItem | Rename-Item -NewName { $_.Name -replace 'Prefix','' }
+    ```
+
+    </MarkdownContainer>
+</MainLayout>
