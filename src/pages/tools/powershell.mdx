@@ -14,8 +14,8 @@ import MarkdownContainer from "../../components/MarkdownContainer.astro";
 
     ### Removing prefixes from files
 
-    Importing or moving stems often generates a lot of files with a prefix in their name. 
-    This is a simple one liner to remove it from all files in the current directory.
+    Stems tend to get unwanted prefixes. 
+    This is a simple one liner to remove a common prefix from all files in the current directory.
     ```powershell
         Get-ChildItem | Rename-Item -NewName { $_.Name -replace 'Prefix','' }
     ```
