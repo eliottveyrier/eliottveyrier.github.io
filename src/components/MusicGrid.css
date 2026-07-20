@@ -376,3 +376,11 @@
 .music-card.selected::before {
     display: none;
 }
+
+@media (max-width: 400px) {
+
+    .music-preview {
+        width: 100%;
+        padding: 0;
+    }
+}

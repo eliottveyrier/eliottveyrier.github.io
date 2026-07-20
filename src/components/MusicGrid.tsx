@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 
 import "./MusicGrid.css";
 import DriveVideo from "./DriveVideo";
+import YoutubeVideo from "./YoutubeVideo";
 
 
 type MusicProject = CollectionEntry<"music">;
@@ -81,7 +82,12 @@ export default function MusicGrid({ projects }: Props) {
                     ref={previewRef}
                     class="music-preview card"
                 >
-                    {selected.data.google_drive_id && (
+                    {selected.data.youtube_id && 
+                        <YoutubeVideo
+                            id={selected.data.youtube_id}
+                        />
+                    }
+                    {selected.data.google_drive_id && !selected.data.youtube_id && (
                         <DriveVideo
                             id={selected.data.google_drive_id}
                         />
