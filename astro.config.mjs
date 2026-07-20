@@ -8,5 +8,6 @@ import preact from '@astrojs/preact';
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), preact()],
-  site: 'https://eliottveyrier.github.io'
+  site: 'https://eliottveyrier.github.io',
+  base: '/'
 });
