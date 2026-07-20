@@ -1,0 +1,16 @@
+---
+interface Props {
+    label?: string;
+}
+
+const { label = "Contact" } = Astro.props;
+
+// To confuse the bots a little bit
+const user = "eliottveyrier";
+const thing = "music"
+const domain = "gmail.com";
+---
+
+<a href={`mailto:${user}${thing}&#64;${domain}`}>
+    {label}
+</a>

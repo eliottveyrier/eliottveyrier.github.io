@@ -1,11 +1,112 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import MainLayout from "../layouts/MainLayout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { sections } from "../config/sections";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout title="Eliott Veyrier">
+    <section class="intro">
+        <p>
+            My name is Eliott Veyrier. I grew up and live in the south of France. 
+			I make games, music for games and film, and various computer programs.
+        </p>
+
+        <p>
+            This site is still under development, and it will house my game and music portfolio,
+			blog and tutorials / articles, alongside some useful tools to make music and games !
+        </p>
+    </section>
+
+    <section class="links">
+        <div class="grid">
+            {
+                sections.map(section => (
+                    <a class="card" href={section.href}>
+                        <h2>{section.title}</h2>
+
+                        <p>
+                            {section.description}
+                        </p>
+
+                        <span>
+                            Explore →
+                        </span>
+                    </a>
+                ))
+            }
+        </div>
+    </section>
+</MainLayout>
+
+<style>
+.intro {
+    max-width: 800px;
+    margin: 4rem auto;
+
+    font-size: 1.2rem;
+}
+
+.intro p {
+    margin-bottom: 1.5rem;
+}
+
+.grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(260px, 1fr)
+        );
+
+    gap: 1.5rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 220px;
+
+    padding: 1.5rem;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    color: var(--text);
+
+    text-decoration: none;
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition),
+        background var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    background: var(--surface-light);
+    border-color: var(--primary);
+}
+
+.card h2 {
+    margin-bottom: .75rem;
+
+    color: var(--primary);
+
+    font-size: 1.5rem;
+}
+
+.card p {
+    flex-grow: 1;
+}
+
+.card span {
+    margin-top: 1rem;
+
+    color: var(--accent);
+    font-weight: 600;
+}
+</style>

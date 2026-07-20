@@ -1,0 +1,9 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import TimecodeConverter from "../../components/tools/TimeCodeConverter";
+
+---
+
+<MainLayout title="Time Code Converter", showNavbar={false}>
+    <TimecodeConverter client:load/>
+</MainLayout>

@@ -1,0 +1,28 @@
+---
+import EmailLink from "./EmailLink.astro"
+---
+
+<footer class="footer">
+    <p>
+        © {new Date().getFullYear()} Eliott Veyrier. <EmailLink label="Contact me"/>
+    </p>
+</footer>
+
+<style>
+.footer {
+    width: min(var(--max-width), calc(100% - 3rem));
+    margin: 4rem auto 0;
+    padding: 2rem 0;
+
+    border-top: 1px solid var(--border);
+
+    text-align: center;
+
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer p {
+    margin: 0;
+}
+</style>

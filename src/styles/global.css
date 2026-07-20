@@ -1,0 +1,359 @@
+/* ============================================================
+   Theme
+============================================================ */
+
+:root {
+    /* Palette */
+    --jungle-green: #04a777;
+    --shadow-grey: #2e282a;
+    --amaranth: #e01a4f;
+    --sandy-clay: #edb88b;
+    --tropical-teal: #17bebb;
+
+    /* Semantic */
+    --bg: var(--shadow-grey);
+    --surface: #393335;
+    --surface-light: #464042;
+    --border: #5d5759;
+
+    --text: #f8f8f8;
+    --text-muted: #c6c6c6;
+
+    --primary: var(--tropical-teal);
+    --secondary: var(--jungle-green);
+    --accent: var(--sandy-clay);
+    --danger: var(--amaranth);
+
+    --radius: 10px;
+    --max-width: 1100px;
+
+    --shadow:
+        0 8px 30px rgba(0, 0, 0, .25);
+
+    --transition: 180ms ease;
+}
+
+/* ============================================================
+   Reset
+============================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    background: var(--bg);
+    color: var(--text);
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    line-height: 1.6;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+::selection {
+    background: var(--primary);
+    color: white;
+}
+
+/* ============================================================
+   Layout
+============================================================ */
+
+main {
+    width: min(var(--max-width), calc(100% - 3rem));
+    margin: 3rem auto;
+}
+
+section {
+    margin: 5rem 0;
+}
+
+/* ============================================================
+   Typography
+============================================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    color: white;
+    line-height: 1.15;
+}
+
+h1 {
+    font-size: clamp(2.8rem, 6vw, 4rem);
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--primary);
+}
+
+h3 {
+    color: var(--accent);
+}
+
+p {
+    color: var(--text-muted);
+}
+
+strong {
+    color: white;
+}
+
+small {
+    color: var(--text-muted);
+}
+
+/* ============================================================
+   Links
+============================================================ */
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   Cards
+============================================================ */
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 1.5rem;
+
+    transition:
+        transform var(--transition),
+        background var(--transition),
+        border-color var(--transition);
+}
+
+.card:hover {
+    background: var(--surface-light);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* ============================================================
+   Buttons
+============================================================ */
+
+button,
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+
+    padding: .75rem 1.25rem;
+
+    border: none;
+    border-radius: var(--radius);
+
+    background: var(--primary);
+    color: white;
+
+    cursor: pointer;
+
+    transition:
+        background var(--transition),
+        transform var(--transition);
+}
+
+button:hover,
+.button:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+
+button.secondary,
+.button.secondary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+button.secondary:hover,
+.button.secondary:hover {
+    border-color: var(--primary);
+}
+
+/* ============================================================
+   Forms
+============================================================ */
+
+input,
+textarea,
+select {
+    width: 100%;
+
+    padding: .75rem 1rem;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    transition: border-color var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* ============================================================
+   Code
+============================================================ */
+
+code {
+    padding: .15rem .35rem;
+
+    border-radius: .35rem;
+
+    background: rgba(255,255,255,.08);
+
+    color: var(--accent);
+}
+
+pre {
+    overflow-x: auto;
+
+    padding: 1rem;
+
+    background: #242021;
+
+    border-radius: var(--radius);
+}
+
+pre code {
+    padding: 0;
+    background: none;
+    color: inherit;
+}
+
+/* ============================================================
+   Tables
+============================================================ */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    color: var(--primary);
+}
+
+th,
+td {
+    padding: .75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ============================================================
+   Blockquotes
+============================================================ */
+
+blockquote {
+    margin: 2rem 0;
+    padding-left: 1rem;
+
+    border-left: 4px solid var(--accent);
+
+    color: var(--text-muted);
+
+    font-style: italic;
+}
+
+/* ============================================================
+   Horizontal rule
+============================================================ */
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+
+    margin: 3rem 0;
+}
+
+/* ============================================================
+   Utilities
+============================================================ */
+
+.text-primary {
+    color: var(--primary);
+}
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+.text-danger {
+    color: var(--danger);
+}
+
+.muted {
+    color: var(--text-muted);
+}
+
+.center {
+    text-align: center;
+}
+
+.surface {
+    background: var(--surface);
+}
+
+.rounded {
+    border-radius: var(--radius);
+}
