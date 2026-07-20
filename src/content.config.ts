@@ -20,4 +20,19 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+const music = defineCollection({
+    loader: glob({
+        pattern: "**/*.{md,mdx}",
+        base: "./src/content/music",
+    }),
+
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        image: z.string(),
+        year: z.number().optional(),
+        priority : z.number().optional(),
+    }),
+});
+
+export const collections = { blog, music };
