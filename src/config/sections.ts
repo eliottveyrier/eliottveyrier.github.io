@@ -11,7 +11,7 @@ export const sections = [
         href: "/projects",
         description:
         "Programming projects : games, software, websites.",
-        nav: true,
+        nav: false,
     },
     {
         title: "Tools",
@@ -25,7 +25,7 @@ export const sections = [
         href: "/scores",
         description:
             "Grab my scores to perform them, or get access to your parts when recording with me",
-        nav: true,
+        nav: false,
     },
     {
         title: "Articles",
