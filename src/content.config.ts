@@ -32,6 +32,7 @@ const music = defineCollection({
         image: z.string(),
         year: z.number().optional(),
         priority : z.number().optional(),
+        google_drive_id : z.string().optional()
     }),
 });
 

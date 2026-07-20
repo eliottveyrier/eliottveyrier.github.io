@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+
+import MainLayout from "../../layouts/MainLayout.astro";
+import MusicGrid from "../../components/MusicGrid";
+
+
+const music = await getCollection("music");
+
+const projects = music.sort((a, b) => {
+    const priorityA = a.data.priority ?? Infinity;
+    const priorityB = b.data.priority ?? Infinity;
+
+    if (priorityA !== priorityB) {
+        return priorityA - priorityB;
+    }
+
+    return (b.data.year ?? 0) - (a.data.year ?? 0);
+});
+---
+
+<MainLayout title="Music">
+    <MusicGrid
+        client:load
+        projects={projects}
+    />
+</MainLayout>
