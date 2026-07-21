@@ -1,24 +1,83 @@
 
 import MainLayout from "../../layouts/MainLayout.astro";
 import MarkdownContainer from "../../components/MarkdownContainer.astro";
+import PlaceholderCodeCopy from "../../components/PlaceholderCodeCopy.tsx";
 
 <MainLayout title="Tools" showNavbar={true}>
     <MarkdownContainer>
-    ## Powershell
+
+    ## Powershell Scripts for Composers
 
     Linux has a beautiful bash, but most music software doesn't have linux support. Mac is quite proprietary. 
     Windows... has powershell.
+
     If you are one of the few windows users in the music-making sphere, you might find this bag of tricks useful.
     
-    If you fall in that category you should also install **ffmpeg**. You can download it from [here](https://ffmpeg.org/).
+    > To open powershell in a folder, you can right click and press open terminal, or open powershell and use the `cd` command to navigate to the folder you want to work in.
+    
+    If you fall in that category you should also install **ffmpeg**. It is a powerful multimedia framework that can decode, encode, transcode, mux, demux, and stream various formats. You can download it from [here](https://ffmpeg.org/).
+    You can also use Winget to install it easily on any recent windows version:
+
+    ```powershell
+        Winget install ffmpeg
+    ```
+
+
+    ---
 
     ### Removing prefixes from files
 
     Stems tend to get unwanted prefixes. 
     This is a simple one liner to remove a common prefix from all files in the current directory.
+
     ```powershell
         Get-ChildItem | Rename-Item -NewName { $_.Name -replace 'Prefix','' }
     ```
+
+    <PlaceholderCodeCopy
+        client:load
+        code={`Get-ChildItem | Rename-Item -NewName { $_.Name -replace '{{Prefix}}','' }`}
+        placeholders={["Prefix"]}
+    />
+
+    ---
+
+    ### Making a video smaller or Ableton-friendly
+
+    The following commands encode the video using H.264 with one keyframe per frame, ensuring compatibility with Ableton Live 12 and later. The original audio stream is copied without re-encoding.
+
+    Earlier versions of Ableton Live require Haali Media Splitter.
+
+    For other DAWs with video support this can make things more predictible too.
+
+    > replace `input.mov` with your video file name, and `output.mp4` with the desired output file name, or use the customize command tool below the command
+
+    The `-crf` parameter controls the quality of the output video. Lower values result in higher quality and larger file sizes, while higher values result in lower quality and smaller file sizes. 
+    A value of 18 is considered visually lossless, while a value of 28 is considered visually acceptable for most purposes.
+
+    ```powershell
+        ffmpeg -i input.mov -c:v libx264 -crf 18 -preset medium -g 1 -keyint_min 1 -sc_threshold 0 -pix_fmt yuv420p -c:a copy output.mp4
+    ```
+
+    <PlaceholderCodeCopy
+        client:load
+        code={`ffmpeg -i {{input.mov}} -c:v libx264 -crf 18 -preset medium -g 1 -keyint_min 1 -sc_threshold 0 -pix_fmt yuv420p -c:a copy {{output.mp4}}`}
+        placeholders={["input.mov", "output.mp4"]}
+    />
+
+    To reduce resource usage, the video can be scaled to 480p:
+
+    ```powershell
+        ffmpeg -i input.mov -vf "scale=-2:480" -c:v libx264 -crf 28 -preset medium -g 1 -keyint_min 1 -sc_threshold 0 -pix_fmt yuv420p -c:a copy output_480p.mp4
+    ```
+
+    <PlaceholderCodeCopy
+        client:load
+        code={`ffmpeg -i {{input.mov}} -vf "scale=-2:480" -c:v libx264 -crf 28 -preset medium -g 1 -keyint_min 1 -sc_threshold 0 -pix_fmt yuv420p -c:a copy {{output_480p.mp4}}`}
+        placeholders={["input.mov", "output_480p.mp4"]}
+    />
+
+    This can make a 1.5GB video file shrink to 100MB, and while this is very lossy you can still use it for reference in your Daw.
 
     </MarkdownContainer>
 </MainLayout>
