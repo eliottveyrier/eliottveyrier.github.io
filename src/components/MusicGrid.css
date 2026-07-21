@@ -19,6 +19,9 @@
     gap: 1.5rem;
 }
 
+.music-grid-item {
+    display: contents;
+}
 
 /* =========================
    Cards
@@ -151,6 +154,12 @@
     flex-direction: column;
 
     gap: 1.5rem;
+}
+
+@media (max-width: 591px) {
+    .music-grid-item > .music-preview {
+        grid-column: 1 / -1;
+    }
 }
 
 .music-card {
