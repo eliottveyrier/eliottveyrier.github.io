@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import "./MusicGrid.css";
 import DriveVideo from "./DriveVideo";
 import YoutubeVideo from "./YoutubeVideo";
+import type { RefObject } from "preact";
 
 
 type MusicProject = CollectionEntry<"music">;
@@ -19,10 +20,23 @@ export default function MusicGrid({ projects }: Props) {
         useState<MusicProject | null>(null);
 
     const previewRef = useRef<HTMLElement | null>(null);
-
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     useEffect(() => {
-        if (selected && previewRef.current) {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 591);
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (selected && previewRef.current && !isMobile) {
             const element = previewRef.current;
 
             const y =
@@ -43,19 +57,19 @@ export default function MusicGrid({ projects }: Props) {
 
             <div class="music-grid">
                 {projects.map((project) => (
-                    <button
-                        key={project.id}
-                        class={`music-card ${
-                            selected?.id === project.id
-                                ? "selected"
-                                : ""
-                        }`}
-                        onClick={() => setSelected(project)}
-                    >
-                        <img
-                            src={project.data.image}
-                            alt={project.data.title}
-                        />
+                    <div key={project.id} class="music-grid-item">
+                        <button
+                            class={`music-card ${
+                                selected?.id === project.id
+                                    ? "selected"
+                                    : ""
+                            }`}
+                            onClick={() => setSelected(project)}
+                        >
+                            <img
+                                src={project.data.image}
+                                alt={project.data.title}
+                            />
 
                             <div class="music-overlay">
                                 <h3>
@@ -72,29 +86,53 @@ export default function MusicGrid({ projects }: Props) {
                                     {project.data.description}
                                 </p>
                             </div>
-                    </button>
+                        </button>
+                        {selected?.id === project.id && isMobile && (
+                            <PreviewVideo
+                                selected={selected}
+                                previewRef={previewRef}
+                            />
+                        )}
+                    </div>
                 ))}
             </div>
+            
+            {
+                !isMobile && <PreviewVideo
+                    selected={selected}
+                    previewRef={previewRef}
+                />
+            }
 
 
-            {selected && (
-                <section
-                    ref={previewRef}
-                    class="music-preview card"
-                >
-                    {selected.data.youtube_id && 
-                        <YoutubeVideo
-                            id={selected.data.youtube_id}
-                        />
-                    }
-                    {selected.data.google_drive_id && !selected.data.youtube_id && (
-                        <DriveVideo
-                            id={selected.data.google_drive_id}
-                        />
-                    )}
-                </section>
-            )}
 
         </div>
     );
+}
+
+interface PreviewVideoProps {
+    selected: MusicProject | null;
+    previewRef: RefObject<any>;
+}
+
+function PreviewVideo({ selected, previewRef }: PreviewVideoProps) {
+    return <>      
+        {selected && (
+            <section
+                ref={previewRef}
+                class="music-preview card"
+            >
+                {selected.data.youtube_id && 
+                    <YoutubeVideo
+                        id={selected.data.youtube_id}
+                    />
+                }
+                {selected.data.google_drive_id && !selected.data.youtube_id && (
+                    <DriveVideo
+                        id={selected.data.google_drive_id}
+                    />
+                )}
+            </section>
+        )}
+    </>
 }
