@@ -18,7 +18,8 @@ const pathname = Astro.url.pathname;
                         <a
                             href={section.href}
                             class:list={{
-                                active: pathname.startsWith(section.href)
+                                active: pathname.startsWith(section.href),
+                                "desktop-only": section.nav_mobile === false
                             }}
                         >
                             {section.title}
@@ -30,6 +31,12 @@ const pathname = Astro.url.pathname;
 </header>
 
 <style>
+@media (max-width: 700px) {
+    .desktop-only {
+        display: none;
+    }
+}
+
 .navbar {
     position: sticky;
     top: 0;
@@ -114,6 +121,10 @@ nav a.active::after {
         flex-wrap: wrap;
         justify-content: center;
         gap: 1rem;
+    }
+
+    .logo {
+        display: none;
     }
 }
 </style>
