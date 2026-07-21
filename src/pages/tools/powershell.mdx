@@ -1,7 +1,11 @@
 
+
+
 import MainLayout from "../../layouts/MainLayout.astro";
 import MarkdownContainer from "../../components/MarkdownContainer.astro";
 import PlaceholderCodeCopy from "../../components/PlaceholderCodeCopy.tsx";
+import { sceneThumbnailScript } from "../../content/commands.ts";
+
 
 <MainLayout title="Tools" showNavbar={true}>
     <MarkdownContainer>
@@ -55,17 +59,20 @@ import PlaceholderCodeCopy from "../../components/PlaceholderCodeCopy.tsx";
     The `-crf` parameter controls the quality of the output video. Lower values result in higher quality and larger file sizes, while higher values result in lower quality and smaller file sizes. 
     A value of 18 is considered visually lossless, while a value of 28 is considered visually acceptable for most purposes.
 
+    #### Almost lossless conversion for DAW compatibility
+
     ```powershell
         ffmpeg -i input.mov -c:v libx264 -crf 18 -preset medium -g 1 -keyint_min 1 -sc_threshold 0 -pix_fmt yuv420p -c:a copy output.mp4
     ```
-
     <PlaceholderCodeCopy
         client:load
         code={`ffmpeg -i {{input.mov}} -c:v libx264 -crf 18 -preset medium -g 1 -keyint_min 1 -sc_threshold 0 -pix_fmt yuv420p -c:a copy {{output.mp4}}`}
         placeholders={["input.mov", "output.mp4"]}
     />
 
-    To reduce resource usage, the video can be scaled to 480p:
+    #### Lossy conversion to save resources
+
+    To reduce resource usage, the video can be scaled to 480p and crf set to 28:
 
     ```powershell
         ffmpeg -i input.mov -vf "scale=-2:480" -c:v libx264 -crf 28 -preset medium -g 1 -keyint_min 1 -sc_threshold 0 -pix_fmt yuv420p -c:a copy output_480p.mp4
@@ -78,6 +85,60 @@ import PlaceholderCodeCopy from "../../components/PlaceholderCodeCopy.tsx";
     />
 
     This can make a 1.5GB video file shrink to 100MB, and while this is very lossy you can still use it for reference in your Daw.
+
+    ---
+
+    ### Detecting scene changes in a video
+    Unless a fade is used, we can detect scene changes in a video using ffmpeg. 
+    We can use this to get a list of timestamps for each scene change, which can be useful for editing or analysis.
+    we can also generate thumbnails for each scene change, and get a quick visual overview of the video.
+
+    ```powershell
+        ffmpeg -i input.mov -filter:v "select='gt(scene,0.4)',showinfo" -f null - 2> scene_changes.txt
+    ```
+    <PlaceholderCodeCopy
+        client:load
+        code={`ffmpeg -i {{input.mov}} -filter:v "select='gt(scene,{{0.40}})',showinfo" -f null - 2> scene_changes.txt`}
+        placeholders={["input.mov", "0.40"]}
+    />
+
+    ---
+
+    ### Generating thumbnails for each scene change in a video
+
+    once you confirm that the treshold detects a good number of scene changes, you can generate thumbnails for each scene change using the following powershell script:
+    
+    Prefer using a video that was downscaled to 480p or 720p, as generating thumbnails for a 4k video can be very slow and resource intensive.
+
+    > You can just copy-paste it in powershell, changing input.mov to your video file name. It will create a folder called "thumbnails" and save the thumbnails there.
+    > You can customize the command for more control over the scene detection threshold and the thumbnail folder.
+
+    ```powershell
+        New-Item -ItemType Directory -Force thumbnails | Out-Null
+
+        ffmpeg -i input.mov -vf "select='gt(scene,0.40)',showinfo" -an -f null NUL 2>&1 |
+        ForEach-Object {
+            if ($_ -match "pts_time:([0-9.]+)") {
+                $s = [double]$Matches[1]
+                $tc = "{0:00}-{1:00}-{2:00}-{3:00}" -f `
+                    [math]::Floor($s / 3600),
+                    [math]::Floor(($s % 3600) / 60),
+                    [math]::Floor($s % 60),
+                    [math]::Floor(($s % 1) * 24)
+
+                ffmpeg -ss $s -i input.mov -frames:v 1 -q:v 2 "thumbnails\$tc.jpg"
+            }
+        }
+    ```
+    <PlaceholderCodeCopy
+    client:load
+    code={sceneThumbnailScript}
+    placeholders={["input.mov", "0.40", "24"]}
+    />
+    > You can change the scene detection threshold by changing the `0.40` value, and the FPS (to get correct timecodes) by changing the `24` value.
+    > `0.40` is fairly conservative, lower values like `0.10` can detect more scenes but risk false-positives, while higher values like `0.60` can detect fewer scenes but risk missing some.
+
+
 
     </MarkdownContainer>
 </MainLayout>
