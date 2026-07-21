@@ -28,7 +28,7 @@ export const sections = [
         href: "/scores",
         description:
             "Grab my scores to perform them, or get access to your parts when recording with me",
-        nav: true,
+        nav: false,
         nav_mobile:false,
     },
     {
