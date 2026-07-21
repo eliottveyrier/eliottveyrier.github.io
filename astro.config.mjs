@@ -9,7 +9,7 @@ import expressiveCode from 'astro-expressive-code';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), preact(), expressiveCode()],
+  integrations: [expressiveCode(), mdx(), preact() ],
   site: 'https://eliottveyrier.github.io',
   base: '/'
 });
