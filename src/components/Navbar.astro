@@ -11,6 +11,16 @@ const pathname = Astro.url.pathname;
         </a>
 
         <nav>
+            <a
+                href="/"
+                class:list={{
+                    active: pathname === "/",
+                    "mobile-only": true
+                }}
+            >
+                Home
+            </a>
+
             {
                 sections
                     .filter(section => section.nav)
@@ -33,6 +43,16 @@ const pathname = Astro.url.pathname;
 <style>
 @media (max-width: 700px) {
     .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 701px) {
+    .mobile-only {
         display: none;
     }
 }
