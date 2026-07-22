@@ -246,32 +246,30 @@ select:focus {
     outline: none;
     border-color: var(--primary);
 }
-
 /* ============================================================
    Code
 ============================================================ */
 
-code {
+/* Inline code only */
+:not(pre) > code {
     padding: .15rem .35rem;
-
     border-radius: .35rem;
-
-    background: rgba(255,255,255,.08);
-
+    background: rgba(255, 255, 255, .08);
     color: var(--accent);
 }
 
-pre {
-    overflow-x: auto;
+/* Fix expressive code blocks missing margin */
+div.expressive-code {
 
-    padding: 1rem;
+    margin-bottom: 1.5rem;
 
-    background: #242021;
-
-    border-radius: var(--radius);
 }
 
-pre code {
+/*
+ * Only style code blocks that are NOT
+ * handled by Expressive Code.
+ */
+pre:not(.expressive-code pre) code {
     padding: 0;
     background: none;
     color: inherit;
