@@ -6,11 +6,6 @@ const tools = [
         title: "Converters",
         description: "Convert timecode, frame rates, and more.",
         href: "/tools/converters",
-    },
-    {
-        title: "Powershell Scripts for Composers",
-        description: "A collection of useful powershell scripts for music-making, with a tool to generate the right command to just copy-paste in powershell.",
-        href: "/tools/powershell",
     }
 ]
 ---
@@ -18,6 +13,13 @@ const tools = [
 
 <MainLayout title="Tools">
     <section class="tools-section">
+        <div class="intro">
+            <h1>Tools</h1>
+            <p>
+                A small collection of practical utilities for music-making, composition, and workflow.
+            </p>
+        </div>
+
         <div class="grid">
             {tools.map((tool) => (
                 <a class="card" href={tool.href}>
@@ -33,6 +35,20 @@ const tools = [
 <style>
 .tools-section {
     margin-top: 2rem;
+}
+
+.intro {
+    margin-bottom: 2rem;
+    max-width: 700px;
+}
+
+.intro h1 {
+    margin-bottom: 0.5rem;
+}
+
+.intro p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
 }
 
 .grid {
