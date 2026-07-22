@@ -83,7 +83,7 @@ export default function MusicGrid({ projects }: Props) {
                                 )}
 
                                 <p>
-                                    {project.data.description}
+                                    {renderDescription(project.data.description)}
                                 </p>
                             </div>
                         </button>
@@ -135,4 +135,22 @@ function PreviewVideo({ selected, previewRef }: PreviewVideoProps) {
             </section>
         )}
     </>
+}
+
+
+
+function renderDescription(description: string) {
+    const parts = description.split(/(\*[^*]+\*)/g);
+
+    return parts.map((part, index) => {
+        if (part.startsWith("*") && part.endsWith("*")) {
+            return (
+                <em key={index}>
+                    {part.slice(1, -1)}
+                </em>
+            );
+        }
+
+        return part;
+    });
 }
