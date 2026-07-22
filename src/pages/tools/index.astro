@@ -9,7 +9,7 @@ const tools = [
     },
     {
         title: "Powershell Scripts for Composers",
-        description: "A collection of useful powershell scripts for music-making.",
+        description: "A collection of useful powershell scripts for music-making, with a tool to generate the right command to just copy-paste in powershell.",
         href: "/tools/powershell",
     }
 ]
@@ -17,15 +17,62 @@ const tools = [
 
 
 <MainLayout title="Tools">
-    <h1>Tools</h1>
-    <ul>
-        {tools.map((tool) => (
-            <li>
-                <a href={tool.href}>
-                    {tool.title}
+    <section class="tools-section">
+        <div class="grid">
+            {tools.map((tool) => (
+                <a class="card" href={tool.href}>
+                    <h2>{tool.title}</h2>
+                    <p>{tool.description}</p>
+                    <span>Open →</span>
                 </a>
-                <p>{tool.description}</p>
-            </li>
-        ))}
-    </ul>
+            ))}
+        </div>
+    </section>
 </MainLayout>
+
+<style>
+.tools-section {
+    margin-top: 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    background: var(--surface-light);
+    border-color: var(--primary);
+}
+
+.card h2 {
+    margin-bottom: 0.75rem;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.card p {
+    flex-grow: 1;
+}
+
+.card span {
+    margin-top: 1rem;
+    color: var(--accent);
+    font-weight: 600;
+}
+</style>
