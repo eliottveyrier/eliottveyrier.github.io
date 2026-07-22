@@ -16,7 +16,8 @@
     "@astrojs/preact": "^6.0.1",
     "astro": "^7.1.1",
     "astro-expressive-code": "^0.44.1",
-    "preact": "^10.29.7"
+    "preact": "^10.29.7",
+    "tonal": "^6.4.3"
   },
   "allowScripts": {
     "esbuild@0.28.1": true
