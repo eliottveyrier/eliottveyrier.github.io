@@ -1,0 +1,253 @@
+---
+title: Visualizing Musical Notes
+description: Using NoteSpan to represent pitch, tonal context, register, and orchestration
+pubDate: 2026-07-22
+slug: music-theory-vis
+---
+
+import NoteSpan from "../../components/mtheory/NoteSpan"
+import InstrumentSpan from "../../components/mtheory/InstrumentSpan"
+
+
+A musical note can carry several different kinds of information.
+
+Its **pitch** may be important. Its relationship to a **tonal center** may be relevant. It may belong to a particular **instrumental family**, or occupy a specific **register**.
+
+`NoteSpan` provides a compact visual representation for these different contexts.
+
+## Tonal context
+
+Notes can be colored relative to a chosen tonal center.
+
+For example, in a scale centered around
+<NoteSpan note="D" colorRoot="D" highlighted />, the colors of the other notes are derived from their position relative to D:
+
+<NoteSpan note="D" colorRoot="D" highlighted />
+<NoteSpan note="E" colorRoot="D" />
+<NoteSpan note="F" colorRoot="D" />
+<NoteSpan note="G" colorRoot="D" />
+<NoteSpan note="A" colorRoot="D" />
+<NoteSpan note="Bb" colorRoot="D" />
+<NoteSpan note="C#" colorRoot="D" />
+
+The `colorRoot` property makes the color system relative rather than absolute. The same pitch can therefore take on a different color when the tonal center changes.
+
+Without specifying a root, the default coloring system is used:
+
+<NoteSpan note="D" highlighted />
+<NoteSpan note="E" />
+<NoteSpan note="F" />
+<NoteSpan note="G" />
+<NoteSpan note="A" />
+<NoteSpan note="Bb" />
+<NoteSpan note="C#" />
+
+This makes it possible to choose between a fixed pitch-based palette and a palette that reflects a particular tonal context.
+
+## Neutral notes
+
+Color is not always useful. Sometimes the spelling or pitch of a note is the important information, while its position in a color system would only add visual noise.
+
+The `noColor` property provides a neutral version of the component:
+
+<NoteSpan note="D" noColor highlighted />
+<NoteSpan note="E" noColor />
+<NoteSpan note="F" noColor />
+<NoteSpan note="G" noColor />
+<NoteSpan note="A" noColor />
+<NoteSpan note="Bb" noColor />
+<NoteSpan note="C#" noColor />
+
+Neutral notes use the site's general visual language instead of the musical color palette. They can therefore be used naturally in explanatory text:
+
+The melody begins on <NoteSpan note="C4" noColor /> and moves toward
+<NoteSpan note="F#4" noColor /> before returning to the tonic.
+
+## Notes in prose
+
+Notes are designed to work naturally inside running text.
+
+A dominant <NoteSpan note="G" highlighted /> tends toward
+<NoteSpan note="C" />, especially when
+<NoteSpan note="B" /> resolves upward.
+
+This allows musical analysis to remain readable without separating every musical element into a diagram.
+
+The same notation can also be used to describe a complete gesture:
+
+<NoteSpan note="C" /> → <NoteSpan note="E" /> → <NoteSpan note="G" highlighted />
+
+<NoteSpan note="C" /> → <NoteSpan note="E" /> → <NoteSpan note="G" highlighted />
+
+## Highlighting important notes
+
+The `highlighted` property gives a note additional visual weight.
+
+This can be useful for emphasizing:
+
+- a tonic: <NoteSpan note="C" highlighted />
+- a dominant: <NoteSpan note="G" />
+- a leading tone: <NoteSpan note="B" />
+- an altered note: <NoteSpan note="F#" />
+- a particular register: <NoteSpan note="C6" />
+
+Highlighting is therefore independent from the note's identity. It can be used to draw attention to a note that is structurally important within a larger musical context.
+
+## Register
+
+Octaves are inferred directly from the note notation.
+
+A melody can therefore be represented as:
+
+<NoteSpan note="C4" />
+<NoteSpan note="E4" />
+<NoteSpan note="G4" highlighted />
+
+The same pitch classes in different registers remain visually distinguishable:
+
+<NoteSpan note="C2" noColor />
+<NoteSpan note="C4" />
+<NoteSpan note="C7" noColor highlighted />
+
+The octave is displayed as a small secondary element, allowing the pitch class to remain the primary visual information.
+
+## Enharmonic spellings
+
+The component preserves the spelling of the input note, including unusual alterations.
+
+For example, the enharmonic relationship between
+<NoteSpan note="C##" /> and <NoteSpan note="D" /> can be represented directly.
+
+Similarly, <NoteSpan note="Fbb" /> may be used when the theoretical spelling is more important than the enharmonic equivalent
+<NoteSpan note="Eb" highlighted />.
+
+Double sharps are represented using `x`:
+
+<NoteSpan note="C##" />
+
+while flats and double flats retain their conventional notation:
+
+<NoteSpan note="Bb" />
+<NoteSpan note="Fbb" />
+
+This makes the component suitable for theoretical contexts where enharmonic spelling carries analytical meaning.
+
+## Different textual contexts
+
+Because `NoteSpan` is an inline component, it can be used in many different kinds of content.
+
+For example, notes can appear in emphasized text:
+
+*an emphasized <NoteSpan note="Eb" /> note*
+
+or in strong text:
+
+**a strong <NoteSpan note="A" highlighted /> note**
+
+They can also appear in lists:
+
+- Tonic: <NoteSpan note="C" highlighted />
+- Dominant: <NoteSpan note="G" />
+- Leading tone: <NoteSpan note="B" />
+- Altered note: <NoteSpan note="F#" />
+
+They can even be used inside links:
+
+[Explore <NoteSpan note="C" /> major](#tonal-context)
+
+or alongside code notation:
+
+The note `C#` can be represented visually as
+<NoteSpan note="C#" />.
+
+The parsed value `Bb4` becomes
+<NoteSpan note="Bb4" highlighted />.
+
+## Instrumental context
+
+The <InstrumentSpan category="strings">violins</InstrumentSpan>
+sustain the melody while the
+<InstrumentSpan category="brass">horns</InstrumentSpan>
+reinforce the cadence.
+
+The same harmonic material can also be viewed through the instruments that carry it.
+
+Consider a simple C-major sonority distributed across the orchestra:
+
+- The **cellos and basses** establish the root:
+  <NoteSpan
+      note="C2"
+      colorBy="instrument"
+      instrumentCategory="strings"
+  />
+
+- The **horns** reinforce the fifth:
+  <NoteSpan
+      note="G3"
+      colorBy="instrument"
+      instrumentCategory="brass"
+  />
+
+- The **violas** fill in the third:
+  <NoteSpan
+      note="E4"
+      colorBy="instrument"
+      instrumentCategory="strings"
+  />
+
+- The **flutes** double the upper root:
+  <NoteSpan
+      note="C5"
+      colorBy="instrument"
+      instrumentCategory="woodwinds"
+  />
+
+The resulting voicing is therefore:
+
+<NoteSpan
+    note="C2"
+    colorBy="instrument"
+    instrumentCategory="strings"
+/>
+
+<NoteSpan
+    note="G3"
+    colorBy="instrument"
+    instrumentCategory="brass"
+/>
+
+<NoteSpan
+    note="E4"
+    colorBy="instrument"
+    instrumentCategory="strings"
+/>
+
+<NoteSpan
+    note="C5"
+    colorBy="instrument"
+    instrumentCategory="woodwinds"
+/>
+
+The pitches form a C-major sonority:
+
+<NoteSpan note="C" colorRoot="C" highlighted />
+<NoteSpan note="E" colorRoot="C" />
+<NoteSpan note="G" colorRoot="C" />
+
+while the instrumental colors reveal how that harmony is distributed through the orchestra.
+
+The low <NoteSpan note="C2" colorBy="instrument" instrumentCategory="strings" />
+provides the foundation. The <NoteSpan note="E4" colorBy="instrument" instrumentCategory="strings" />
+adds the third within the string section, while the
+<NoteSpan note="G3" colorBy="instrument" instrumentCategory="brass" />
+gives the sonority a distinct brass reinforcement.
+
+Finally, the upper
+<NoteSpan note="C5" colorBy="instrument" instrumentCategory="woodwinds" />
+provides a lighter doubling of the root.
+
+In this context, the two color systems describe different dimensions of the same event:
+
+- **Relative note colors** describe the harmonic relationship between pitches.
+- **Instrument colors** describe the orchestral section responsible for each pitch.
+- **Octaves** describe the register and spacing of the voicing.

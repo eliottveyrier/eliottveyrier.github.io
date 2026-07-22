@@ -1,0 +1,156 @@
+.chord-span {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.2em 0.55em;
+
+    border-radius: 0.45em;
+
+    background: color-mix(
+        in oklch,
+        var(--note-color) 18%,
+        transparent
+    );
+
+    color: color-mix(
+        in oklch,
+        var(--note-color) 70%,
+        var(--note-color-light)
+    );
+
+    font-size: 0.9em;
+    font-weight: 700;
+    line-height: 1.2;
+
+    white-space: nowrap;
+
+    transition:
+        background-color 150ms ease,
+        color 150ms ease,
+        box-shadow 150ms ease,
+        transform 150ms ease;
+}
+
+.chord-span:hover {
+    background: color-mix(
+        in oklch,
+        var(--note-color) 28%,
+        transparent
+    );
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   Highlighted
+============================================================ */
+
+.chord-span--highlighted {
+    background: var(--note-color);
+
+    color: color-mix(
+        in oklch,
+        white 88%,
+        var(--note-color)
+    );
+}
+
+.chord-span--highlighted:hover {
+    background: var(--note-color);
+}
+
+
+/* ============================================================
+   No color
+============================================================ */
+
+.chord-span--no-color {
+    background: color-mix(
+        in oklch,
+        var(--text) 10%,
+        transparent
+    );
+
+    color: var(--text);
+}
+
+.chord-span--no-color:hover {
+    background: color-mix(
+        in oklch,
+        var(--text) 18%,
+        transparent
+    );
+}
+
+
+/* ============================================================
+   Highlighted + no color
+============================================================ */
+
+.chord-span--no-color.chord-span--highlighted {
+    background: var(--primary);
+
+    color: color-mix(
+        in oklch,
+        white 88%,
+        var(--primary)
+    );
+}
+
+.chord-span--no-color.chord-span--highlighted:hover {
+    background: var(--primary);
+}
+
+
+/* ============================================================
+   Arrow variant
+============================================================ */
+
+.chord-span--arrow {
+    margin-right: 0.70em;
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.chord-span--no-color:not(.chord-span--highlighted)::after {
+    background: color-mix(
+        in oklch,
+        var(--accent) 90%,
+        transparent
+    );
+}
+.chord-span--no-color.chord-span--highlighted::after {
+    background: color-mix(
+        in oklch,
+        var(--primary) 90%,
+        transparent
+    );
+}
+
+.chord-span--arrow::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: -0.80em;
+
+    width: 0.8em;
+    height: 100%;
+
+    background: color-mix(
+        in oklch,
+        var(--note-color-light) 90%,
+        transparent
+    );
+
+    clip-path: polygon(
+        0 0,
+        100% 50%,
+        0 100%
+    );
+}

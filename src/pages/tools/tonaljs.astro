@@ -1,0 +1,79 @@
+---
+// src/components/TonalReference.astro
+
+import {
+    Note,
+    Interval,
+    Chord,
+    Scale,
+    Key,
+    Progression,
+    RomanNumeral,
+} from "tonal";
+
+const examples = {
+    note: {
+        input: "C#4",
+        result: Note.get("C#4"),
+    },
+
+    interval: {
+        input: "M3",
+        result: Interval.get("M3"),
+    },
+
+    chord: {
+        input: "Cmaj7",
+        result: Chord.get("Cmaj7"),
+    },
+
+    scale: {
+        input: "C major",
+        result: Scale.get("C major"),
+    },
+
+    key: {
+        input: "C",
+        result: Key.majorKey("C"),
+    },
+
+    romanNumeral: {
+        input: "V7",
+        result: RomanNumeral.get("V7"),
+    },
+
+    progression: {
+        input: ["I", "V", "vi", "IV"],
+        result: Progression.fromRomanNumerals(
+            "C",
+            ["I", "V", "vi", "IV"],
+        ),
+    },
+};
+
+const sections = [
+    ["Notes", examples.note],
+    ["Intervals", examples.interval],
+    ["Chords", examples.chord],
+    ["Scales", examples.scale],
+    ["Keys", examples.key],
+    ["Roman Numerals", examples.romanNumeral],
+    ["Progressions", examples.progression],
+] as const;
+---
+
+<div class="tonal-reference">
+    <h2>Tonal.js Reference</h2>
+
+    {sections.map(([title, example]) => (
+        <section>
+            <h3>{title}</h3>
+
+            <p>
+                <code>{JSON.stringify(example.input)}</code>
+            </p>
+
+            <pre>{JSON.stringify(example.result, null, 2)}</pre>
+        </section>
+    ))}
+</div>

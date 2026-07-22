@@ -1,0 +1,121 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import MarkdownContainer from "../../components/MarkdownContainer.astro";
+import InstrumentSpan from "../../components/mtheory/InstrumentSpan";
+import ColorPicker from "../../components/ColorPicker";
+
+import {
+    categoryColorVariations,
+    type InstrumentCategory,
+} from "../../lib/music/instrumentColors";
+
+import StudioOnePaletteDownload
+    from "../../components/music/StudioOnePaletteDownload.astro";
+
+const categories: InstrumentCategory[] = [
+    "woodwinds",
+    "brass",
+    "strings",
+    "percussion",
+    "keyboards",
+    "voices",
+    "synths",
+    "fx",
+];
+
+const labels: Record<InstrumentCategory, string> = {
+    woodwinds: "Woodwinds",
+    brass: "Brass",
+    strings: "Strings",
+    percussion: "Percussion",
+    keyboards: "Keyboards",
+    voices: "Voices",
+    synths: "Synths",
+    fx: "FX",
+};
+---
+
+<MainLayout title="Instrument Colors" showNavbar={true}>
+    <MarkdownContainer>
+        <h1>Instrument colors</h1>
+
+        <p>
+            I keep forgetting which color I usually use for what instrument...
+            This could help!
+        </p>
+
+        <div class="color-grid">
+            {
+                categories.flatMap((category) => {
+                    const colors = [
+                        categoryColorVariations[`${category}_hi`],
+                        categoryColorVariations[category],
+                        categoryColorVariations[`${category}_lo`],
+                    ];
+
+                    const names = [
+                        `High ${labels[category]}`,
+                        labels[category],
+                        `Low ${labels[category]}`,
+                    ];
+
+                    return colors.map((color, index) => (
+                        <div class="color-cell">
+                            <InstrumentSpan
+                                cat={category}
+                                color={color}
+                            >
+                                {names[index]}
+                            </InstrumentSpan>
+
+                            <ColorPicker
+                                client:load
+                                color={color}
+                            />
+                        </div>
+                    ));
+                })
+            }
+        </div>
+    <StudioOnePaletteDownload/>
+    </MarkdownContainer>
+</MainLayout>
+
+<style>
+    .color-grid {
+        display: grid !important;
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 0.75rem 1rem;
+    }
+
+    .color-cell {
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            max-content;
+
+        align-items: center;
+
+        gap: 0.75rem;
+
+        min-width: 0;
+    }
+
+    .color-cell :global(.instrument-span) {
+        min-width: 0;
+    }
+
+    .color-cell :global(.color-picker) {
+        justify-self: end;
+    }
+
+    @media (max-width: 642px) {
+        .color-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

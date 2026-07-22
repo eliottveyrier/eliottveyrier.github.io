@@ -1,0 +1,144 @@
+---
+title: Music theory components
+description: Visualizing harmony and chord symbols with ChordSpan
+pubDate: 2026-07-22
+slug: music-theory-vis-chords
+---
+
+import NoteSpan from "../../components/mtheory/NoteSpan"
+import ChordSpan from "../../components/mtheory/ChordSpan"
+import InstrumentSpan from "../../components/mtheory/InstrumentSpan"
+
+
+## Note span
+
+```jsx
+<NoteSpan note="D" highlighted />
+<NoteSpan note="E" />
+<NoteSpan note="F" />
+<NoteSpan note="G" />
+<NoteSpan note="A" />
+<NoteSpan note="Bb" />
+<NoteSpan note="C#" />
+```
+<NoteSpan note="C" />
+<NoteSpan note="D" highlighted />
+<NoteSpan note="E" />
+<NoteSpan note="F" />
+<NoteSpan note="G" />
+<NoteSpan note="A" />
+<NoteSpan note="Bb" />
+
+---
+
+```js
+<NoteSpan note="D" colorRoot="D" highlighted />
+<NoteSpan note="E" colorRoot="D" />
+<NoteSpan note="F" colorRoot="D" />
+<NoteSpan note="G" colorRoot="D" />
+<NoteSpan note="A" colorRoot="D" />
+<NoteSpan note="Bb" colorRoot="D" />
+<NoteSpan note="C#" colorRoot="D" />
+```
+
+<NoteSpan note="D" colorRoot="D" highlighted />
+<NoteSpan note="E" colorRoot="D" />
+<NoteSpan note="F" colorRoot="D" />
+<NoteSpan note="G" colorRoot="D" />
+<NoteSpan note="A" colorRoot="D" />
+<NoteSpan note="Bb" colorRoot="D" />
+<NoteSpan note="C#" colorRoot="D" />
+---
+
+## Chord Span
+
+```jsx
+<ChordSpan chord="Cmaj7" highlighted showArrow/>
+<ChordSpan chord="Dm"  />
+<ChordSpan chord="Em7"  />
+<ChordSpan chord="Fmaj7"/>
+<ChordSpan chord="G7"   highlighted />
+<ChordSpan chord="Am7"  showArrow/>
+<ChordSpan chord="Bo7"  />
+```
+
+<ChordSpan chord="Cmaj7" highlighted showArrow/>
+<ChordSpan chord="Dm"  />
+<ChordSpan chord="Em7"  />
+<ChordSpan chord="Fmaj7"/>
+<ChordSpan chord="G7"   highlighted />
+<ChordSpan chord="Am7"  showArrow/>
+<ChordSpan chord="Bo7"  />
+
+## Instrument Span
+
+```jsx
+<InstrumentSpan category="strings">violin</InstrumentSpan>
+<InstrumentSpan cat="strings">violin</InstrumentSpan>
+```
+
+<InstrumentSpan cat="woodwinds">Woodwinds</InstrumentSpan> like
+<InstrumentSpan cat="woodwinds">flute</InstrumentSpan>,
+<InstrumentSpan cat="woodwinds">oboe</InstrumentSpan>,
+<InstrumentSpan cat="woodwinds">clarinet</InstrumentSpan>, and
+<InstrumentSpan cat="woodwinds">bassoon</InstrumentSpan> are represented in brown.
+
+<InstrumentSpan category="brass">Brass</InstrumentSpan> like
+<InstrumentSpan category="brass">trumpet</InstrumentSpan>,
+<InstrumentSpan category="brass">horn</InstrumentSpan>,
+<InstrumentSpan category="brass">trombone</InstrumentSpan>, and
+<InstrumentSpan category="brass">tuba</InstrumentSpan> are represented in gold.
+
+<InstrumentSpan category="percussion">Percussion</InstrumentSpan> like
+<InstrumentSpan category="percussion">timpani</InstrumentSpan>,
+<InstrumentSpan category="percussion">snare drum</InstrumentSpan>, and
+<InstrumentSpan category="percussion">cymbals</InstrumentSpan> are represented in blue.
+
+<InstrumentSpan category="keyboards">Keyboards</InstrumentSpan> like
+<InstrumentSpan category="keyboards">piano</InstrumentSpan>,
+<InstrumentSpan category="keyboards">organ</InstrumentSpan>, and
+<InstrumentSpan category="keyboards">harpsichord</InstrumentSpan> are represented in green.
+
+<InstrumentSpan category="voices">Voices</InstrumentSpan> like
+<InstrumentSpan category="voices">soprano</InstrumentSpan>,
+<InstrumentSpan category="voices">alto</InstrumentSpan>,
+<InstrumentSpan category="voices">tenor</InstrumentSpan>, and
+<InstrumentSpan category="voices">bass</InstrumentSpan> are represented in a light pink.
+
+<InstrumentSpan category="synths">Synths</InstrumentSpan> are represented in purple.
+
+<InstrumentSpan category="strings">Strings</InstrumentSpan> like
+<InstrumentSpan category="strings">violin</InstrumentSpan>,
+<InstrumentSpan category="strings">harp</InstrumentSpan>, and
+<InstrumentSpan category="strings">cello</InstrumentSpan> are represented in red.
+
+this can be applied to notes :
+
+```jsx
+<NoteSpan
+    note="C5"
+    colorBy="instrument"
+    instrumentCategory="woodwinds"
+/>
+```
+
+<NoteSpan
+    note="E5"
+    colorBy="instrument"
+    instrumentCategory="woodwinds"
+/>
+<NoteSpan
+    note="G5"
+    colorBy="instrument"
+    instrumentCategory="strings"
+/>
+<NoteSpan
+    note="C6"
+    colorBy="instrument"
+    instrumentCategory="woodwinds"
+/>
+<NoteSpan
+    note="C5"
+    colorBy="instrument"
+    instrumentCategory="percussion"
+/>

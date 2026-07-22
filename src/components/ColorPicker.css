@@ -1,0 +1,47 @@
+.color-picker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+
+    padding: 0.25em 0.45em;
+
+    border: 1px solid var(--border);
+    border-radius: 0.45em;
+
+    background: var(--surface);
+
+    color: var(--text-muted);
+
+    font-family: monospace;
+    font-size: 0.85em;
+
+    cursor: pointer;
+
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+}
+
+.color-picker:hover {
+    background: var(--surface-light);
+    border-color: var(--primary);
+    color: var(--text);
+}
+
+.color-picker__swatch {
+    width: 1.2em;
+    height: 1.2em;
+
+    border-radius: 0.25em;
+
+    border: 1px solid color-mix(
+        in oklch,
+        var(--text) 20%,
+        transparent
+    );
+}
+
+.color-picker__value {
+    min-width: 5.5em;
+}

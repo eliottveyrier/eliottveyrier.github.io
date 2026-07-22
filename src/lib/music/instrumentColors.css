@@ -1,0 +1,47 @@
+.instrument-color-woodwinds {
+    --note-color-light: oklch(0.80 0.12 65);
+    --note-color:       oklch(0.65 0.16 65);
+    --note-color-dark:  oklch(0.45 0.13 65);
+}
+
+.instrument-color-brass {
+    --note-color-light: oklch(0.88 0.16 95);
+    --note-color:       oklch(0.76 0.18 95);
+    --note-color-dark:  oklch(0.52 0.16 95);
+}
+
+.instrument-color-strings {
+    --note-color-light: oklch(0.80 0.14 25);
+    --note-color:       oklch(0.65 0.20 25);
+    --note-color-dark:  oklch(0.45 0.16 25);
+}
+
+.instrument-color-percussion {
+    --note-color-light: oklch(0.80 0.14 230);
+    --note-color:       oklch(0.65 0.18 230);
+    --note-color-dark:  oklch(0.45 0.15 230);
+}
+
+.instrument-color-keyboards {
+    --note-color-light: oklch(0.80 0.12 145);
+    --note-color:       oklch(0.65 0.15 145);
+    --note-color-dark:  oklch(0.45 0.12 145);
+}
+
+.instrument-color-voices {
+    --note-color-light: oklch(0.979 0.035 355);
+    --note-color:       oklch(0.865 0.055 355);
+    --note-color-dark:  oklch(0.559 0.035 355);
+}
+
+.instrument-color-synths {
+    --note-color-light: oklch(0.80 0.12 300);
+    --note-color:       oklch(0.65 0.18 300);
+    --note-color-dark:  oklch(0.45 0.15 300);
+}
+
+.instrument-color-fx {
+    --note-color-light: oklch(0.80 0.12 300);
+    --note-color:       oklch(0.65 0.18 300);
+    --note-color-dark:  oklch(0.45 0.15 300);
+}

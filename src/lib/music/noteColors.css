@@ -1,0 +1,48 @@
+.note-color-c {
+    /* Green */
+    --note-color-light: oklch(0.80 0.12 145);
+    --note-color:       oklch(0.65 0.15 145);
+    --note-color-dark:  oklch(0.45 0.12 145);
+}
+
+.note-color-d {
+    /* Blue */
+    --note-color-light: oklch(0.80 0.14 230);
+    --note-color:       oklch(0.65 0.18 230);
+    --note-color-dark:  oklch(0.45 0.15 230);
+}
+
+.note-color-e {
+    /* Indigo */
+    --note-color-light: oklch(0.80 0.12 270);
+    --note-color:       oklch(0.65 0.16 270);
+    --note-color-dark:  oklch(0.45 0.14 270);
+}
+
+.note-color-f {
+    /* Violet */
+    --note-color-light: oklch(0.80 0.14 300);
+    --note-color:       oklch(0.65 0.18 300);
+    --note-color-dark:  oklch(0.45 0.15 300);
+}
+
+.note-color-g {
+    /* Red */
+    --note-color-light: oklch(0.80 0.14 25);
+    --note-color:       oklch(0.65 0.20 25);
+    --note-color-dark:  oklch(0.45 0.16 25);
+}
+
+.note-color-a {
+    /* Orange */
+    --note-color-light: oklch(0.80 0.15 70);
+    --note-color:       oklch(0.65 0.19 70);
+    --note-color-dark:  oklch(0.45 0.15 70);
+}
+
+.note-color-b {
+    /* Yellow */
+    --note-color-light: oklch(0.80 0.15 105);
+    --note-color:       oklch(0.65 0.17 105);
+    --note-color-dark:  oklch(0.45 0.14 105);
+}

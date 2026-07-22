@@ -1,0 +1,96 @@
+.note-span {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.1em;
+    box-sizing: border-box;
+
+    padding: 0.15em 0.5em;
+
+    border-radius: 0.4em;
+
+    background: color-mix(
+        in oklch,
+        var(--note-color) 18%,
+        transparent
+    );
+
+    color: color-mix(
+        in oklch,
+        var(--note-color) 65%,
+        var(--note-color-light)
+    );
+
+    font-size: 0.85em;
+    font-weight: 700;
+    line-height: 1.2;
+
+    white-space: nowrap;
+
+    transition:
+        background-color 150ms ease,
+        color 150ms ease,
+        box-shadow 150ms ease,
+        transform 150ms ease;
+}
+
+.note-span:has(.note-span__octave) {
+    justify-content: flex-start;
+
+    padding-left: 0.35em;
+    padding-right: 0.65em;
+}
+
+.note-span--highlighted {
+    background: var(--note-color);
+
+    color: color-mix(
+        in oklch,
+        white 88%,
+        var(--note-color)
+    );
+
+    box-shadow:
+        0 0 0 2px color-mix(
+            in oklch,
+            var(--note-color) 30%,
+            transparent
+        );
+}
+
+.note-span--no-color {
+    background: var(--surface);
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+}
+
+.note-span--no-color.note-span--highlighted {
+    background: var(--primary);
+
+    color: white;
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 2px color-mix(
+            in oklch,
+            var(--primary) 30%,
+            transparent
+        );
+}
+
+.note-span__octave {
+    position: absolute;
+
+    top: 0.15em;
+    right: 0.25em;
+
+    font-size: 0.8em;
+    font-weight: 700;
+    line-height: 1;
+}
