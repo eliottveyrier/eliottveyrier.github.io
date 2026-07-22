@@ -20,6 +20,25 @@ const blog = defineCollection({
     }),
 });
 
+const articles = defineCollection({
+    loader: glob({
+        pattern: "**/*.{md,mdx}",
+        base: "./src/content/articles",
+    }),
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        pubDate: z.coerce.date(),
+
+        category: z.string(),
+        tags: z.array(z.string()).default([]),
+        heroImage: z.string().optional(),
+        draft: z.boolean().default(false),
+
+        slug: z.string(),
+    }),
+});
+
 const music = defineCollection({
     loader: glob({
         pattern: "**/*.{md,mdx}",
@@ -37,4 +56,4 @@ const music = defineCollection({
     }),
 });
 
-export const collections = { blog, music };
+export const collections = { blog, articles, music };

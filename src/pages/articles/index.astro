@@ -1,0 +1,100 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+
+const articles = await getCollection("articles");
+
+const groupedArticles = articles.reduce((acc, article) => {
+    const category = article.data.category || "General";
+
+    if (!acc[category]) {
+        acc[category] = [];
+    }
+
+    acc[category].push(article);
+
+    return acc;
+}, {} as Record<string, typeof articles>);
+
+const sortedCategories = Object.entries(groupedArticles)
+    .sort(([a], [b]) => a.localeCompare(b));
+---
+
+<MainLayout title="Articles">
+    <section class="articles">
+        {sortedCategories.map(([category, categoryArticles]) => (
+            <div class="category-group">
+                <h2>{category}</h2>
+
+                <ul>
+                    {categoryArticles
+                        .sort(
+                            (a, b) =>
+                                b.data.pubDate.valueOf() -
+                                a.data.pubDate.valueOf()
+                        )
+                        .map((article) => (
+                            <li>
+                                <a href={`/articles/${article.data.slug}`}>
+                                    {article.data.title}
+                                </a>
+                            </li>
+                        ))}
+                </ul>
+            </div>
+        ))}
+    </section>
+</MainLayout>
+
+<style>
+    .articles {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .category-group h2 {
+        margin: 0 0 0.1rem;
+
+        padding-bottom: .2rem;
+
+        font-size: 1.5rem;
+        color: var(--primary);
+    }
+
+    .category-group ul {
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+
+        margin: 0;
+        padding: 0 0 0 1.5rem;
+
+        list-style: none;
+    }
+
+    .category-group li {
+        position: relative;
+    }
+
+    .category-group a {
+        display: block;
+
+        padding: .4rem 0;
+
+        color: var(--accent);
+
+        transition:
+            color var(--transition),
+            padding-left var(--transition);
+    }
+
+    .category-group a:hover {
+        padding-left: .5rem;
+
+        color: var(--primary);
+    }
+</style>
