@@ -1,5 +1,3 @@
-// src/lib/makeStudioOneColorPalette.ts
-
 import {
     categoryColorVariations,
     type InstrumentCategory,
@@ -46,7 +44,6 @@ function normalizeHex(
         );
     }
 
-    // Always return RGB, dropping alpha if present.
     return hex.slice(-6);
 }
 
@@ -229,6 +226,10 @@ function adjustColor(
 }
 
 
+/* ============================================================
+   Orchestral category columns
+============================================================ */
+
 function categoryPalette(
     category: InstrumentCategory,
 ): string[] {
@@ -248,42 +249,109 @@ function categoryPalette(
         ];
 
     return [
-        high,
+        /*
+         * High register
+         */
+        toStudioOneColor(high),
 
         adjustColor(high, {
-            lightness: 10,
-            saturation: -12,
+            hue: 8,
+            saturation: -18,
+            lightness: 12,
         }),
 
-        base,
+        /*
+         * Main category
+         */
+        toStudioOneColor(base),
 
         adjustColor(base, {
-            lightness: -5,
-            saturation: 12,
+            hue: -6,
+            saturation: 18,
+            lightness: -8,
         }),
 
-        low,
+        /*
+         * Low register
+         */
+        toStudioOneColor(low),
 
         adjustColor(low, {
-            lightness: -10,
-            saturation: 10,
+            hue: -10,
+            saturation: 20,
+            lightness: -12,
         }),
     ];
 }
 
 
 /* ============================================================
-   Padding
+   Secondary accent columns
 ============================================================ */
 
-function makePaddingColumn(): string[] {
+/*
+ * These are deliberately not neutral padding colors.
+ *
+ * They provide additional useful colors for:
+ *
+ * - auxiliary tracks
+ * - buses
+ * - markers
+ * - sound design
+ * - transitions
+ * - special instruments
+ * - one-off elements
+ */
+const ACCENT_COLORS = [
+    "#E85D75",
+    "#F28E5C",
+    "#E6C84A",
+    "#7FBE6A",
+    "#4FAF9B",
+    "#55A9D6",
+    "#6977D8",
+    "#A66BC4",
+];
+
+
+/*
+ * Each accent column follows the same six-row
+ * structure as the orchestral columns.
+ */
+function accentPalette(
+    color: string,
+): string[] {
     return [
-        "FF303030",
-        "FF404040",
-        "FF505050",
-        "FF606060",
-        "FF707070",
-        "FF808080",
+        adjustColor(color, {
+            saturation: 8,
+            lightness: 18,
+        }),
+
+        adjustColor(color, {
+            hue: 8,
+            saturation: -8,
+            lightness: 8,
+        }),
+
+        toStudioOneColor(color),
+
+        adjustColor(color, {
+            hue: -6,
+            saturation: 12,
+            lightness: -6,
+        }),
+
+        adjustColor(color, {
+            hue: -10,
+            saturation: 18,
+            lightness: -16,
+        }),
+
+        adjustColor(color, {
+            hue: 12,
+            saturation: 24,
+            lightness: -24,
+        }),
     ];
 }
 
@@ -293,25 +361,29 @@ function makePaddingColumn(): string[] {
 ============================================================ */
 
 export function makeStudioOneColorPalette(): string[] {
-    const columns =
-        ORCHESTRAL_ORDER.map(
+    const columns = [
+        ...ORCHESTRAL_ORDER.map(
             category =>
                 categoryPalette(
                     category,
                 ),
-        );
+        ),
 
-    while (
-        columns.length <
-        COLUMN_COUNT
-    ) {
-        columns.push(
-            makePaddingColumn(),
-        );
-    }
+        ...ACCENT_COLORS.map(
+            color =>
+                accentPalette(color),
+        ),
+    ];
 
     const palette: string[] = [];
 
+    /*
+     * Studio One fills the palette from left
+     * to right, then top to bottom.
+     *
+     * Transpose the columns so each category
+     * occupies one vertical column.
+     */
     for (
         let row = 0;
         row < VARIATION_COUNT;
@@ -328,14 +400,6 @@ export function makeStudioOneColorPalette(): string[] {
         }
     }
 
-    /*
-     * Normalize the final result.
-     *
-     * This guarantees that every single output
-     * is Studio One's opaque ARGB format:
-     *
-     *     FFRRGGBB
-     */
     return palette.map(
         toStudioOneColor,
     );

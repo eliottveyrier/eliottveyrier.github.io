@@ -1,0 +1,139 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import MarkdownContainer from "../../components/MarkdownContainer.astro";
+
+import {
+    makeStudioOneColorPalette,
+} from "../../lib/music/makeStudioOneColorPalete";
+
+const palette =
+    makeStudioOneColorPalette();
+
+const COLUMN_COUNT = 16;
+const ROW_COUNT = 6;
+
+const rows = Array.from(
+    {
+        length: ROW_COUNT,
+    },
+    (_, row) =>
+        palette.slice(
+            row * COLUMN_COUNT,
+            (row + 1) *
+                COLUMN_COUNT,
+        ),
+    );
+---
+
+<MainLayout
+    title="Studio One Palette Debug"
+    showNavbar={true}
+>
+    <MarkdownContainer>
+        <h1>Studio One Palette</h1>
+
+        <p>
+            Debug preview of the generated
+            <code>.colorpalette</code>.
+        </p>
+
+        <div class="palette">
+            {
+                rows.map((row) =>
+                    row.map((color: string) => (
+                        <div
+                            class="color-cell"
+                            style={{
+                                backgroundColor:
+                                    `#${color.slice(2)}`,
+                            }}
+                            title={color}
+                        >
+                            <span>
+                                {color}
+                            </span>
+                        </div>
+                    )),
+                )
+            }
+        </div>
+
+        <h2>Generated colors</h2>
+
+        <pre>{JSON.stringify(
+            {
+                colors: palette,
+            },
+            null,
+            4,
+        )}</pre>
+    </MarkdownContainer>
+</MainLayout>
+
+<style>
+    .palette {
+        display: grid;
+
+        grid-template-columns:
+            repeat(16, minmax(0, 1fr));
+
+        gap: 0.35rem;
+
+        margin-block: 2rem;
+    }
+
+    .color-cell {
+        display: flex;
+
+        aspect-ratio: 1;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 0.3rem;
+
+        color: white;
+
+        font-size: 0.65rem;
+        font-weight: 700;
+
+        text-align: center;
+
+        text-shadow:
+            0 1px 2px
+            rgb(0 0 0 / 50%);
+
+        overflow: hidden;
+    }
+
+    .color-cell span {
+        opacity: 0;
+
+        transition:
+            opacity 150ms ease;
+    }
+
+    .color-cell:hover span {
+        opacity: 1;
+    }
+
+    pre {
+        max-height: 40rem;
+
+        overflow: auto;
+    }
+
+    @media (max-width: 900px) {
+        .palette {
+            grid-template-columns:
+                repeat(8, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 500px) {
+        .palette {
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+        }
+    }
+</style>
