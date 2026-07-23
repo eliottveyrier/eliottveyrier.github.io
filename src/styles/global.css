@@ -33,6 +33,10 @@
     --transition: 180ms ease;
 }
 
+html {
+    scrollbar-gutter: stable;
+}
+
 /* ============================================================
    Reset
 ============================================================ */
@@ -104,16 +108,17 @@ h3,
 h4,
 h5,
 h6 {
-    margin-top: 0.5rem;
     color: white;
     line-height: 1.15;
 }
 
 h1 {
+    margin-top: 0.5rem;
     font-size: clamp(2.8rem, 6vw, 4rem);
 }
 
 h2 {
+    margin-top: 0.5rem;
     font-size: clamp(2rem, 4vw, 2.8rem);
     color: var(--primary);
 }
@@ -354,4 +359,50 @@ hr {
 
 .rounded {
     border-radius: var(--radius);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Scrollbar                                                                   */
+/* -------------------------------------------------------------------------- */
+
+html {
+    scrollbar-gutter: stable;
+    scrollbar-color: color-mix(
+        in srgb,
+        var(--primary) 70%,
+        transparent
+    ) transparent;
+}
+
+html::-webkit-scrollbar {
+    width: 12px;
+}
+
+html::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        to bottom,
+        var(--primary),
+        color-mix(
+            in srgb,
+            var(--primary) 65%,
+            var(--secondary)
+        )
+    );
+
+    border: 4px solid transparent;
+    border-radius: 999px;
+    background-clip: padding-box;
+
+    transition:
+        background 180ms ease,
+        border-width 180ms ease;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    border-width: 2px;
 }

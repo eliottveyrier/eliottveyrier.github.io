@@ -32,7 +32,7 @@ const {
 } = family.data;
 ---
 
-<MainLayout title={fullName} showNavbar={false}>
+<MainLayout title={fullName}>
     <main class="family-page">
         <header class="family-header">
             <h2>{fullName}</h2>
@@ -52,7 +52,7 @@ const {
 
 <style>
     .family-page {
-        width: min(100% - 2rem, 1200px);
+        width: min(100% - 2rem, 800px);
         margin: 0 auto;
         padding: 3rem 0 6rem;
     }
@@ -66,12 +66,11 @@ const {
     }
 
     .family-seating-chart {
-        width: 400;
+        width: 300;
         margin: 0;
     }
 
     .family-content {
-        max-width: 800px;
         margin: 0 auto;
     }
 </style>

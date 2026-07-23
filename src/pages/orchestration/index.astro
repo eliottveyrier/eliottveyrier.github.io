@@ -1,0 +1,215 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+import OrchestralSeatingNav from "../../components/OrchestralSeatingNav";
+
+const families = await getCollection("families");
+const instruments = await getCollection("instruments");
+---
+
+<MainLayout title="Orchestration">
+    <div class="orchestration-index">
+        <header class="page-header">
+            <p class="text-accent">Reference</p>
+            <h1>Orchestration</h1>
+        </header>
+
+        <OrchestralSeatingNav width="300" highlightList={[]}/>
+
+        <div class="orchestration-sections">
+            <section class="orchestration-section">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>Families</h2>
+                </div>
+
+                {families.length > 0 ? (
+                    <ul class="orchestration-list">
+                        {families.map((item) => (
+                            <li>
+                                {item.data.slug ? (
+                                    <a
+                                        href={`/orchestration/family/${item.data.slug}`}
+                                    >
+                                        <span>
+                                            {item.data.fullName ?? item.id}
+                                        </span>
+                                        <span class="arrow">↗</span>
+                                    </a>
+                                ) : (
+                                    <span>
+                                        {item.data.fullName ?? item.id}
+                                    </span>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No families found.</p>
+                )}
+            </section>
+
+            <section class="orchestration-section">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Instruments</h2>
+                </div>
+
+                {instruments.length > 0 ? (
+                    <ul class="orchestration-list">
+                        {instruments.map((item) => (
+                            <li>
+                                {item.data.slug ? (
+                                    <a
+                                        href={`/orchestration/instruments/${item.data.slug}`}
+                                    >
+                                        <span>
+                                            {item.data.fullName ?? item.id}
+                                        </span>
+                                        <span class="arrow">↗</span>
+                                    </a>
+                                ) : (
+                                    <span>
+                                        {item.data.fullName ?? item.id}
+                                    </span>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No instruments found.</p>
+                )}
+            </section>
+        </div>
+    </div>
+</MainLayout>
+
+<style>
+    .page-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .page-header small {
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+
+    .page-header h1 {
+        margin: 0;
+    }
+
+    .orchestration-nav {
+        margin-bottom: 2.5rem;
+        padding: 1rem;
+
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+    }
+
+    .orchestration-sections {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3rem;
+    }
+
+    .orchestration-section {
+        margin: 0;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+
+        border-bottom: 1px solid var(--border);
+    }
+
+    .section-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .section-number {
+        color: var(--accent);
+        font-family: monospace;
+        font-size: 0.75rem;
+    }
+
+    .orchestration-list {
+        display: flex;
+        flex-direction: column;
+
+        margin: 0;
+        padding: 0;
+
+        list-style: none;
+    }
+
+    .orchestration-list li {
+        border-bottom: 1px solid color-mix(
+            in srgb,
+            var(--border) 60%,
+            transparent
+        );
+    }
+
+    .orchestration-list a,
+    .orchestration-list li > span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+
+        padding: 0.5rem;
+
+        color: var(--text);
+    }
+
+    .orchestration-list a {
+        transition:
+            color var(--transition),
+            padding-left var(--transition),
+            background var(--transition);
+    }
+
+    .orchestration-list a:hover {
+        padding-left: 0.75rem;
+
+        background: color-mix(
+            in srgb,
+            var(--primary) 6%,
+            transparent
+        );
+    }
+
+    .arrow {
+        color: var(--accent);
+        opacity: 0;
+
+        transform: translate(-0.25rem, 0.25rem);
+
+        transition:
+            opacity var(--transition),
+            transform var(--transition);
+    }
+
+    .orchestration-list a:hover .arrow {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    @media (max-width: 700px) {
+        .orchestration-nav {
+            padding: 0.5rem;
+        }
+
+        .orchestration-sections {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+</style>
