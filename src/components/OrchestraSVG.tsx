@@ -22,6 +22,7 @@ type InstrumentGroup =
 
 type InstrumentCategory = 
   | 'strings'
+  | 'bowed-strings'
   | 'keyboard'
   | 'woodwinds'
   | 'voices'
@@ -43,6 +44,7 @@ interface OrchestraSVGProps extends HTMLAttributes<SVGSVGElement> {
 // Map categories to their member groups
 const categoryMap: Record<InstrumentCategory, InstrumentGroup[]> = {
   'strings': ['violins-i', 'violins-ii', 'celli', 'violas', 'harp', 'contrabasses'],
+  'bowed-strings' : ['violins-i', 'violins-ii', 'celli', 'violas', 'contrabasses'],
   'keyboard': ['keyboard-left', 'keyboard-right'],
   'woodwinds': ['woodwinds'],
   'voices': ['choir'],

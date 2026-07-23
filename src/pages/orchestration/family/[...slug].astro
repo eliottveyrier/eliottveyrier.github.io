@@ -6,58 +6,58 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 
 
 export async function getStaticPaths() {
-    const instruments = await getCollection("instruments");
+    const families = await getCollection("families");
 
-    return instruments.map((instrument : CollectionEntry<"instruments">) => ({
+    return families.map((family : CollectionEntry<"families">) => ({
         params: {
-            slug: instrument.data.slug,
+            slug: family.data.slug,
         },
         props: {
-            instrument,
+            family,
         },
     }));
 }
 
 interface Props {
-    instrument: CollectionEntry<"instruments">;
+    family: CollectionEntry<"families">;
 }
 
-const { instrument } = Astro.props;
+const { family } = Astro.props;
 
-const { Content } = await render(instrument);
+const { Content } = await render(family);
 
 const {
     fullName,
     sittingChartSections,
-} = instrument.data;
+} = family.data;
 ---
 
 <MainLayout title={fullName}>
-    <main class="instrument-page">
-        <header class="instrument-header">
+    <main class="family-page">
+        <header class="family-header">
             <h2>{fullName}</h2>
         </header>
 
-        <section class="instrument-seating-chart">
+        <section class="family-seating-chart">
             <OrchestralSeatingChart
                 highlightList={sittingChartSections}
             />
         </section>
 
-        <article class="instrument-content">
+        <article class="family-content">
             <Content />
         </article>
     </main>
 </MainLayout>
 
 <style>
-    .instrument-page {
+    .family-page {
         width: min(100% - 2rem, 1200px);
         margin: 0 auto;
         padding: 3rem 0 6rem;
     }
 
-    .instrument-header {
+    .family-header {
         margin-bottom: 2rem;
     }
 
@@ -65,12 +65,12 @@ const {
         margin: 0;
     }
 
-    .instrument-seating-chart {
+    .family-seating-chart {
         width: 200;
         margin: 0;
     }
 
-    .instrument-content {
+    .family-content {
         max-width: 800px;
         margin: 0 auto;
     }

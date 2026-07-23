@@ -72,7 +72,7 @@ const highlightListItem = z.enum([
     "percussion",
     "synths",
     "fx",
-
+    "bowed-strings",
     "strings",
     "keyboard",
     "voices",
@@ -108,4 +108,31 @@ const instruments = defineCollection({
     }),
 });
 
-export const collections = { blog, articles, music, instruments };
+const families = defineCollection({
+    loader: glob({
+        pattern: "**/*.{md,mdx}",
+        base: "./src/content/orchestration/families",
+    }),
+    schema: z.object({
+        fullName: z.string(),
+
+        sittingChartSections: z.array(
+            highlightListItem
+        ),
+
+        category: z.enum([
+            "strings",
+            "keyboard",
+            "woodwinds",
+            "voices",
+            "brass",
+            "percussion",
+            "synths",
+            "fx",
+        ]),
+
+        slug: z.string(),
+    }),
+});
+
+export const collections = { blog, articles, music, instruments, families };
