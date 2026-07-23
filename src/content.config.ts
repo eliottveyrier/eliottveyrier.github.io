@@ -56,4 +56,56 @@ const music = defineCollection({
     }),
 });
 
-export const collections = { blog, articles, music };
+const highlightListItem = z.enum([
+    "violins-i",
+    "violins-ii",
+    "celli",
+    "violas",
+    "harp",
+    "contrabasses",
+    "keyboard-left",
+    "keyboard-right",
+    "woodwinds",
+    "choir",
+    "horns",
+    "brass",
+    "percussion",
+    "synths",
+    "fx",
+
+    "strings",
+    "keyboard",
+    "voices",
+    "all",
+]);
+
+const instruments = defineCollection({
+    loader: glob({
+        pattern: "**/*.{md,mdx}",
+        base: "./src/content/orchestration/instruments",
+    }),
+    schema: z.object({
+        fullName: z.string(),
+
+        sittingChartSections: z.array(
+            highlightListItem
+        ),
+
+        category: z.enum([
+            "strings",
+            "keyboard",
+            "woodwinds",
+            "voices",
+            "brass",
+            "percussion",
+            "synths",
+            "fx",
+        ]),
+
+        slug: z.string(),
+
+        family: z.string(),
+    }),
+});
+
+export const collections = { blog, articles, music, instruments };

@@ -1,6 +1,8 @@
 import { h, type HTMLAttributes } from 'preact';
 import "./OrchestraSVG.css"
 
+export type HighlightListItem = InstrumentGroup | InstrumentCategory;
+
 type InstrumentGroup = 
   | 'violins-i'
   | 'violins-ii'

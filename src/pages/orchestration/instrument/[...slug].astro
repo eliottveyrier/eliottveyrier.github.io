@@ -1,0 +1,77 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import OrchestralSeatingChart from "../../../components/OrchestralSeatingChart";
+
+import { type CollectionEntry, getCollection, render } from "astro:content";
+
+
+export async function getStaticPaths() {
+    const instruments = await getCollection("instruments");
+
+    return instruments.map((instrument : CollectionEntry<"instruments">) => ({
+        params: {
+            slug: instrument.data.slug,
+        },
+        props: {
+            instrument,
+        },
+    }));
+}
+
+interface Props {
+    instrument: CollectionEntry<"instruments">;
+}
+
+const { instrument } = Astro.props;
+
+const { Content } = await render(instrument);
+
+const {
+    fullName,
+    sittingChartSections,
+} = instrument.data;
+---
+
+<MainLayout title={fullName}>
+    <main class="instrument-page">
+        <header class="instrument-header">
+            <h1>{fullName}</h1>
+        </header>
+
+        <section class="instrument-seating-chart">
+            <OrchestralSeatingChart
+                highlightList={sittingChartSections}
+            />
+        </section>
+
+        <article class="instrument-content">
+            <Content />
+        </article>
+    </main>
+</MainLayout>
+
+<style>
+    .instrument-page {
+        width: min(100% - 2rem, 1200px);
+        margin: 0 auto;
+        padding: 3rem 0 6rem;
+    }
+
+    .instrument-header {
+        margin-bottom: 2rem;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    .instrument-seating-chart {
+        width: 200;
+        margin: 0;
+    }
+
+    .instrument-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+</style>
