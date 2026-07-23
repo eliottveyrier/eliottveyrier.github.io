@@ -1,6 +1,6 @@
 ---
 import MainLayout from "../../../layouts/MainLayout.astro";
-import OrchestralSeatingChart from "../../../components/OrchestralSeatingChart";
+import OrchestralSeatingNav from "../../../components/OrchestralSeatingNav";
 
 import { type CollectionEntry, getCollection, render } from "astro:content";
 
@@ -32,14 +32,14 @@ const {
 } = family.data;
 ---
 
-<MainLayout title={fullName}>
+<MainLayout title={fullName} showNavbar={false}>
     <main class="family-page">
         <header class="family-header">
             <h2>{fullName}</h2>
         </header>
 
         <section class="family-seating-chart">
-            <OrchestralSeatingChart
+            <OrchestralSeatingNav client:load
                 highlightList={sittingChartSections}
             />
         </section>
@@ -61,12 +61,12 @@ const {
         margin-bottom: 2rem;
     }
 
-    h1 {
+    h2 {
         margin: 0;
     }
 
     .family-seating-chart {
-        width: 200;
+        width: 400;
         margin: 0;
     }
 

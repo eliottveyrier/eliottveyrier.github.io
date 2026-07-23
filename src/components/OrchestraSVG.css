@@ -40,3 +40,13 @@
 .orchestra-svg .instrument-group.muted:hover>path {
   animation: strokeOscillate 0.9s ease-in-out infinite;
 }
+
+.orchestra-svg .instrument-group {
+    cursor: pointer;
+    outline: none;
+}
+
+.orchestra-svg .instrument-group:focus,
+.orchestra-svg .instrument-group:focus-visible {
+    outline: none;
+}

@@ -1,6 +1,6 @@
 ---
 import MainLayout from "../../../layouts/MainLayout.astro";
-import OrchestralSeatingChart from "../../../components/OrchestralSeatingChart";
+import OrchestralSeatingNav from "../../../components/OrchestralSeatingNav";
 
 import { type CollectionEntry, getCollection, render } from "astro:content";
 
@@ -39,7 +39,7 @@ const {
         </header>
 
         <section class="instrument-seating-chart">
-            <OrchestralSeatingChart
+            <OrchestralSeatingNav client:load
                 highlightList={sittingChartSections}
             />
         </section>
@@ -61,7 +61,7 @@ const {
         margin-bottom: 2rem;
     }
 
-    h1 {
+    h2 {
         margin: 0;
     }
 
