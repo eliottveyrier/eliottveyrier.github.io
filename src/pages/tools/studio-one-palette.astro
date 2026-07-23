@@ -4,13 +4,17 @@ import MarkdownContainer from "../../components/MarkdownContainer.astro";
 
 import {
     makeStudioOneColorPalette,
+    studioOneToCssColor,
 } from "../../lib/music/makeStudioOneColorPalete";
+
 
 const palette =
     makeStudioOneColorPalette();
 
+
 const COLUMN_COUNT = 16;
 const ROW_COUNT = 6;
+
 
 const rows = Array.from(
     {
@@ -24,6 +28,7 @@ const rows = Array.from(
         ),
     );
 ---
+
 
 <MainLayout
     title="Studio One Palette Debug"
@@ -45,7 +50,9 @@ const rows = Array.from(
                             class="color-cell"
                             style={{
                                 backgroundColor:
-                                    `#${color.slice(2)}`,
+                                    studioOneToCssColor(
+                                        color,
+                                    ),
                             }}
                             title={color}
                         >
@@ -69,6 +76,7 @@ const rows = Array.from(
         )}</pre>
     </MarkdownContainer>
 </MainLayout>
+
 
 <style>
     .palette {

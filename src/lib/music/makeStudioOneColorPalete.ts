@@ -3,8 +3,10 @@ import {
     type InstrumentCategory,
 } from "./instrumentColors";
 
+
 const COLUMN_COUNT = 16;
 const VARIATION_COUNT = 6;
+
 
 const ORCHESTRAL_ORDER: InstrumentCategory[] = [
     "woodwinds",
@@ -17,6 +19,7 @@ const ORCHESTRAL_ORDER: InstrumentCategory[] = [
     "fx",
 ];
 
+
 type Hsl = {
     h: number;
     s: number;
@@ -25,15 +28,16 @@ type Hsl = {
 
 
 /* ============================================================
-   Color conversion
+   Color normalization
 ============================================================ */
 
 function normalizeHex(
     color: string,
 ): string {
-    const hex = color
-        .replace(/^#/, "")
-        .toUpperCase();
+    const hex =
+        color
+            .replace(/^#/, "")
+            .toUpperCase();
 
     if (
         hex.length !== 6 &&
@@ -44,16 +48,20 @@ function normalizeHex(
         );
     }
 
+    /*
+     * Internally, all colors are standard RGB:
+     *
+     *     RRGGBB
+     *
+     * If an alpha channel is provided, discard it.
+     */
     return hex.slice(-6);
 }
 
 
-function toStudioOneColor(
-    color: string,
-): string {
-    return `FF${normalizeHex(color)}`;
-}
-
+/* ============================================================
+   RGB → HSL
+============================================================ */
 
 function hexToHsl(
     hex: string,
@@ -80,15 +88,25 @@ function hexToHsl(
         ) / 255;
 
     const max =
-        Math.max(r, g, b);
+        Math.max(
+            r,
+            g,
+            b,
+        );
 
     const min =
-        Math.min(r, g, b);
+        Math.min(
+            r,
+            g,
+            b,
+        );
 
     const l =
         (max + min) / 2;
 
-    if (max === min) {
+    if (
+        max === min
+    ) {
         return {
             h: 0,
             s: 0,
@@ -101,8 +119,10 @@ function hexToHsl(
 
     const s =
         l > 0.5
-            ? d / (2 - max - min)
-            : d / (max + min);
+            ? d /
+                (2 - max - min)
+            : d /
+                (max + min);
 
     let h: number;
 
@@ -134,7 +154,11 @@ function hexToHsl(
 }
 
 
-function hslToStudioOneHex(
+/* ============================================================
+   HSL → RGB
+============================================================ */
+
+function hslToHex(
     h: number,
     s: number,
     l: number,
@@ -142,13 +166,24 @@ function hslToStudioOneHex(
     s /= 100;
     l /= 100;
 
-    const k = (n: number) =>
-        (n + h / 30) % 12;
+    const k = (
+        n: number,
+    ) =>
+        (
+            n +
+            h / 30
+        ) % 12;
 
     const a =
-        s * Math.min(l, 1 - l);
+        s *
+        Math.min(
+            l,
+            1 - l,
+        );
 
-    const f = (n: number) =>
+    const f = (
+        n: number,
+    ) =>
         l -
         a *
             Math.max(
@@ -165,17 +200,68 @@ function hslToStudioOneHex(
     const toHex = (
         value: number,
     ) =>
-        Math.round(value * 255)
+        Math.round(
+            value * 255,
+        )
             .toString(16)
-            .padStart(2, "0")
+            .padStart(
+                2,
+                "0",
+            )
             .toUpperCase();
 
     return [
-        "FF",
         toHex(f(0)),
         toHex(f(8)),
         toHex(f(4)),
     ].join("");
+}
+
+
+/* ============================================================
+   Studio One color format
+============================================================ */
+
+/*
+ * Internal color format:
+ *
+ *     RRGGBB
+ *
+ * Studio One format:
+ *
+ *     ABGR
+ *
+ * For opaque colors:
+ *
+ *     FFBBGGRR
+ *
+ * Example:
+ *
+ *     #9AD0ED
+ *
+ *     R = 9A
+ *     G = D0
+ *     B = ED
+ *     A = FF
+ *
+ *     → FFEDD09A
+ */
+function toStudioOneColor(
+    color: string,
+): string {
+    const hex =
+        normalizeHex(color);
+
+    const r =
+        hex.slice(0, 2);
+
+    const g =
+        hex.slice(2, 4);
+
+    const b =
+        hex.slice(4, 6);
+
+    return `FF${b}${g}${r}`;
 }
 
 
@@ -198,7 +284,7 @@ function adjustColor(
     const hsl =
         hexToHsl(color);
 
-    return hslToStudioOneHex(
+    return hslToHex(
         (
             hsl.h +
             hue +
@@ -248,39 +334,51 @@ function categoryPalette(
             `${category}_lo`
         ];
 
+    /*
+     * All colors remain standard RGB here.
+     */
     return [
         /*
          * High register
          */
-        toStudioOneColor(high),
+        high,
 
-        adjustColor(high, {
-            hue: 8,
-            saturation: -18,
-            lightness: 12,
-        }),
+        adjustColor(
+            high,
+            {
+                hue: 8,
+                saturation: -18,
+                lightness: 12,
+            },
+        ),
 
         /*
          * Main category
          */
-        toStudioOneColor(base),
+        base,
 
-        adjustColor(base, {
-            hue: -6,
-            saturation: 18,
-            lightness: -8,
-        }),
+        adjustColor(
+            base,
+            {
+                hue: -6,
+                saturation: 18,
+                lightness: -8,
+            },
+        ),
 
         /*
          * Low register
          */
-        toStudioOneColor(low),
+        low,
 
-        adjustColor(low, {
-            hue: -10,
-            saturation: 20,
-            lightness: -12,
-        }),
+        adjustColor(
+            low,
+            {
+                hue: -10,
+                saturation: 20,
+                lightness: -12,
+            },
+        ),
     ];
 }
 
@@ -289,19 +387,6 @@ function categoryPalette(
    Secondary accent columns
 ============================================================ */
 
-/*
- * These are deliberately not neutral padding colors.
- *
- * They provide additional useful colors for:
- *
- * - auxiliary tracks
- * - buses
- * - markers
- * - sound design
- * - transitions
- * - special instruments
- * - one-off elements
- */
 const ACCENT_COLORS = [
     "#E85D75",
     "#F28E5C",
@@ -314,44 +399,58 @@ const ACCENT_COLORS = [
 ];
 
 
-/*
- * Each accent column follows the same six-row
- * structure as the orchestral columns.
- */
 function accentPalette(
     color: string,
 ): string[] {
+    /*
+     * All colors remain standard RGB here.
+     */
     return [
-        adjustColor(color, {
-            saturation: 8,
-            lightness: 18,
-        }),
+        adjustColor(
+            color,
+            {
+                saturation: 8,
+                lightness: 18,
+            },
+        ),
 
-        adjustColor(color, {
-            hue: 8,
-            saturation: -8,
-            lightness: 8,
-        }),
+        adjustColor(
+            color,
+            {
+                hue: 8,
+                saturation: -8,
+                lightness: 8,
+            },
+        ),
 
-        toStudioOneColor(color),
+        color,
 
-        adjustColor(color, {
-            hue: -6,
-            saturation: 12,
-            lightness: -6,
-        }),
+        adjustColor(
+            color,
+            {
+                hue: -6,
+                saturation: 12,
+                lightness: -6,
+            },
+        ),
 
-        adjustColor(color, {
-            hue: -10,
-            saturation: 18,
-            lightness: -16,
-        }),
+        adjustColor(
+            color,
+            {
+                hue: -10,
+                saturation: 18,
+                lightness: -16,
+            },
+        ),
 
-        adjustColor(color, {
-            hue: 12,
-            saturation: 24,
-            lightness: -24,
-        }),
+        adjustColor(
+            color,
+            {
+                hue: 12,
+                saturation: 24,
+                lightness: -24,
+            },
+        ),
     ];
 }
 
@@ -371,18 +470,22 @@ export function makeStudioOneColorPalette(): string[] {
 
         ...ACCENT_COLORS.map(
             color =>
-                accentPalette(color),
+                accentPalette(
+                    color,
+                ),
         ),
     ];
 
     const palette: string[] = [];
 
     /*
-     * Studio One fills the palette from left
-     * to right, then top to bottom.
+     * Studio One fills the palette:
      *
-     * Transpose the columns so each category
-     * occupies one vertical column.
+     *     left → right
+     *     then top → bottom
+     *
+     * Transpose the column-oriented palette
+     * into row-major order.
      */
     for (
         let row = 0;
@@ -400,7 +503,54 @@ export function makeStudioOneColorPalette(): string[] {
         }
     }
 
+    /*
+     * Convert from standard RGB to Studio One ABGR.
+     *
+     * RRGGBB
+     *     ↓
+     * FFBBGGRR
+     */
     return palette.map(
         toStudioOneColor,
     );
+}
+
+
+export function studioOneToCssColor(
+    color: string,
+): string {
+    const hex =
+        color
+            .replace(/^#/, "")
+            .toUpperCase();
+
+    if (
+        hex.length !== 8
+    ) {
+        throw new Error(
+            `Invalid Studio One color format: ${color}`,
+        );
+    }
+
+    /*
+     * Studio One format:
+     *
+     *     A B G R
+     *
+     *     FF BB GG RR
+     *
+     * CSS format:
+     *
+     *     #RRGGBB
+     */
+    const r =
+        hex.slice(6, 8);
+
+    const g =
+        hex.slice(4, 6);
+
+    const b =
+        hex.slice(2, 4);
+
+    return `#${r}${g}${b}`;
 }

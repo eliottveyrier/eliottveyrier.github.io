@@ -3,6 +3,8 @@ import {
     makeStudioOneColorPalette,
 } from "../../lib/music/makeStudioOneColorPalete";
 
+import { Icon } from 'astro-icon/components'
+
 interface Props {
     filename?: string;
     className?: string;
@@ -43,12 +45,7 @@ const classes = [
         alt="Fender Studio Pro"
     />
 
-    <span
-        class="studio-one-palette-download__arrow"
-        aria-hidden="true"
-    >
-        ↓
-    </span>
+    <Icon name="lucide:swatch-book" class="studio-one-palette-download__arrow"/>
 </a>
 
 <style>
