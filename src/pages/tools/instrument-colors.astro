@@ -12,6 +12,8 @@ import {
 import StudioOnePaletteDownload
     from "../../components/music/StudioOnePaletteDownload.astro";
 
+import OrchestralSeatingChart from "../../components/OrchestralSeatingChart"
+
 const categories: InstrumentCategory[] = [
     "woodwinds",
     "brass",
@@ -43,6 +45,8 @@ const labels: Record<InstrumentCategory, string> = {
             I keep forgetting which color I usually use for what instrument...
             This could help!
         </p>
+
+        <OrchestralSeatingChart highlightList={["violins-i"]} width={"100%"}/>
 
         <div class="color-grid">
             {

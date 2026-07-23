@@ -1,0 +1,42 @@
+:root {
+  --muted-brightness: 0.7;
+  --highlight-brightness: 1;
+}
+
+/* Override default styles */
+.orchestra-svg .instrument-group.highlighted {
+  opacity: 1;
+}
+.orchestra-svg .instrument-group:hover path{
+  fill-opacity: 0.7;
+}
+
+.orchestra-svg .instrument-group.highlighted path {
+  filter: brightness(var(--highlight-brightness));
+}
+
+.orchestra-svg .instrument-group.muted path {
+  filter: brightness(var(--muted-brightness));
+}
+
+/* Hover effects */
+.orchestra-svg .instrument-group.muted:hover path {
+  filter: brightness(var(--muted-brightness));
+}
+
+/* Oscillating stroke animation on hover */
+@keyframes strokeOscillate {
+  0% {
+    stroke-width: 11px;
+  }
+  75% {
+    stroke-width: 16px;
+  }
+  100% {
+    stroke-width: 11px;
+  }
+}
+
+.orchestra-svg .instrument-group.muted:hover>path {
+  animation: strokeOscillate 0.9s ease-in-out infinite;
+}

@@ -40,15 +40,14 @@ export function instrumentColorClass(
 ): InstrumentColorClass {
     return INSTRUMENT_COLOR_CLASSES[category];
 }
-
 export const categoryInstrumentColors: Record<
     InstrumentCategory,
     string
 > = {
-    woodwinds:  "#B47A4A",
+    woodwinds:  "#4F82B8",
     brass:      "#D9A441",
     strings:    "#C94A4A",
-    percussion: "#4F82B8",
+    percussion: "#5FAF9A",
     keyboards:  "#5FA66A",
     voices:     "#D9A6B5",
     synths:     "#9A63C7",
@@ -65,9 +64,9 @@ export const categoryColorVariations: Record<
      * ============================================================
      */
 
-    woodwinds_hi: "#D09A63",
-    woodwinds:    "#B47A4A",
-    woodwinds_lo: "#96603F",
+    woodwinds_hi: "#6D9AC8",
+    woodwinds:    "#4F82B8",
+    woodwinds_lo: "#416F9F",
 
     /*
      * ============================================================
@@ -95,9 +94,9 @@ export const categoryColorVariations: Record<
      * ============================================================
      */
 
-    percussion_hi: "#6D9AC8",
-    percussion:    "#4F82B8",
-    percussion_lo: "#416F9F",
+    percussion_hi: "#7AC8B2",
+    percussion:    "#5FAF9A",
+    percussion_lo: "#438C78",
 
     /*
      * ============================================================
@@ -105,16 +104,15 @@ export const categoryColorVariations: Record<
      * ============================================================
      */
 
-    keyboards_hi: "#72B87B",
+    keyboards_hi: "#7BC486",
     keyboards:    "#5FA66A",
-    keyboards_lo: "#4B8955",
+    keyboards_lo: "#43894F",
 
     /*
      * ============================================================
      * Voices
      * ============================================================
      */
-
     voices_hi: "#E4B9C7",
     voices:    "#D9A6B5",
     voices_lo: "#B9798F",
