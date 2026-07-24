@@ -12,7 +12,7 @@ import {
 import StudioOnePaletteDownload
     from "../../components/music/StudioOnePaletteDownload.astro";
 
-import OrchestralSeatingChart from "../../components/OrchestralSeatingChart"
+import OrchestralSeatingChart from "../../components/orchestration/OrchestralSeatingChart"
 
 const categories: InstrumentCategory[] = [
     "woodwinds",
@@ -28,6 +28,7 @@ const categories: InstrumentCategory[] = [
 const labels: Record<InstrumentCategory, string> = {
     woodwinds: "Woodwinds",
     brass: "Brass",
+    horns: "horns",
     strings: "Strings",
     percussion: "Percussion",
     keyboards: "Keyboards",

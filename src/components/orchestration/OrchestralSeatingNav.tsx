@@ -15,7 +15,7 @@ const ORCHESTRAL_GROUP_TO_INSTRUMENT: Partial<
     "violins-i": "violins",
     "violins-ii": "violins",
     violas: "violas",
-    celli: "cello",
+    celli: "celli",
     "double-basses": "double-basses",
 };
 

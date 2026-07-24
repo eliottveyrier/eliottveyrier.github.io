@@ -130,6 +130,7 @@ const families = defineCollection({
             "synths",
             "fx",
         ]),
+        members:  z.array(z.string()),
 
         slug: z.string(),
     }),

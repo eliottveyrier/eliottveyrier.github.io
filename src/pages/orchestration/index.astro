@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
-import OrchestralSeatingNav from "../../components/OrchestralSeatingNav";
+import OrchestralSeatingNav from "../../components/orchestration/OrchestralSeatingNav";
 
 const families = await getCollection("families");
 const instruments = await getCollection("instruments");
@@ -10,7 +10,6 @@ const instruments = await getCollection("instruments");
 <MainLayout title="Orchestration">
     <div class="orchestration-index">
         <header class="page-header">
-            <p class="text-accent">Reference</p>
             <h1>Orchestration</h1>
         </header>
 

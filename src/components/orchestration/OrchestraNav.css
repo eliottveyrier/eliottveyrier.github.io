@@ -1,0 +1,154 @@
+/* ============================================================
+   Orchestra Navigation
+============================================================ */
+
+.orchestra-nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(240px, 0.8fr);
+
+    gap: 2rem;
+    align-items: center;
+
+    padding: 1.5rem;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+
+/* ============================================================
+   Seating Chart
+============================================================ */
+
+.orchestra-nav__chart {
+    min-width: 0;
+
+    padding: 0.5rem;
+}
+
+
+/* ============================================================
+   Information Panel
+============================================================ */
+
+.orchestra-nav__info {
+    min-width: 0;
+
+    padding: 1.5rem;
+
+    border-left: 1px solid var(--border);
+}
+
+.orchestra-nav__info h2 {
+    margin: 0 0 1.25rem;
+
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+
+/* ============================================================
+   Members
+============================================================ */
+
+.orchestra-nav__members {
+    margin-top: 1.5rem;
+}
+
+.orchestra-nav__members p {
+    margin: 0 0 0.5rem;
+
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.orchestra-nav__members ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.orchestra-nav__members li {
+    padding: 0.35rem 0.65rem;
+
+    background: color-mix(
+        in srgb,
+        var(--primary) 12%,
+        var(--surface-light)
+    );
+
+    border: 1px solid color-mix(
+        in srgb,
+        var(--primary) 30%,
+        var(--border)
+    );
+
+    border-radius: 999px;
+
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.orchestra-nav__members > span {
+    display: block;
+
+    margin-top: 0.75rem;
+
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+
+/* ============================================================
+   Responsive
+============================================================ */
+
+@media (max-width: 800px) {
+    .orchestra-nav {
+        grid-template-columns: 1fr;
+    }
+
+    .orchestra-nav__info {
+        padding: 1.25rem 0 0;
+
+        border-top: 1px solid var(--border);
+        border-left: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .orchestra-nav {
+        padding: 1rem;
+    }
+
+    .orchestra-nav__chart {
+        padding: 0;
+    }
+
+    .orchestra-nav__info {
+        padding-top: 1rem;
+    }
+}
+
+.orchestra-nav__chart {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orchestra-nav__chart .orchestra-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
