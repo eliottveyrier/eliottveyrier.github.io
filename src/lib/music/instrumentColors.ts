@@ -1,6 +1,7 @@
 export type InstrumentCategory =
     | "woodwinds"
     | "brass"
+    | "horns"
     | "strings"
     | "percussion"
     | "keyboards"
@@ -12,6 +13,7 @@ export type InstrumentCategory =
 export type InstrumentColorClass =
     | "instrument-color-woodwinds"
     | "instrument-color-brass"
+    | "instrument-color-horns"
     | "instrument-color-strings"
     | "instrument-color-percussion"
     | "instrument-color-keyboards"
@@ -26,6 +28,8 @@ const INSTRUMENT_COLOR_CLASSES: Record<
 > = {
     woodwinds: "instrument-color-woodwinds",
     brass: "instrument-color-brass",
+    horns: "instrument-color-horns",
+
     strings: "instrument-color-strings",
     percussion: "instrument-color-percussion",
     keyboards: "instrument-color-keyboards",
@@ -46,6 +50,7 @@ export const categoryInstrumentColors: Record<
 > = {
     woodwinds:  "#4F82B8",
     brass:      "#D9A441",
+    horns:      "#da893c",
     strings:    "#C94A4A",
     percussion: "#5FAF9A",
     keyboards:  "#5FA66A",
@@ -66,7 +71,7 @@ export const categoryColorVariations: Record<
 
     woodwinds_hi: "#6D9AC8",
     woodwinds:    "#4F82B8",
-    woodwinds_lo: "#416F9F",
+    woodwinds_lo: "#1e65b1",
 
     /*
      * ============================================================
@@ -74,9 +79,13 @@ export const categoryColorVariations: Record<
      * ============================================================
      */
 
-    brass_hi: "#F0C968",
-    brass:    "#D9A441",
-    brass_lo: "#A87829",
+    brass_hi: "#FFE58A",
+    brass:    "#F2C230",
+    brass_lo: "#C99600",
+
+    horns_hi: "#D98A2B",
+    horns:    "#A95F16",
+    horns_lo: "#71350D",
 
     /*
      * ============================================================
@@ -84,9 +93,9 @@ export const categoryColorVariations: Record<
      * ============================================================
      */
 
-    strings_hi: "#E06A6A",
-    strings:    "#C94A4A",
-    strings_lo: "#A93636",
+    strings_hi: "#e62929",
+    strings:    "#c72f2f",
+    strings_lo: "#af2222",
 
     /*
      * ============================================================
@@ -94,9 +103,9 @@ export const categoryColorVariations: Record<
      * ============================================================
      */
 
-    percussion_hi: "#7AC8B2",
+    percussion_hi: "#4ad29e",
     percussion:    "#5FAF9A",
-    percussion_lo: "#438C78",
+    percussion_lo: "#32a07f",
 
     /*
      * ============================================================
@@ -106,7 +115,7 @@ export const categoryColorVariations: Record<
 
     keyboards_hi: "#7BC486",
     keyboards:    "#5FA66A",
-    keyboards_lo: "#43894F",
+    keyboards_lo: "#248434",
 
     /*
      * ============================================================
@@ -114,8 +123,8 @@ export const categoryColorVariations: Record<
      * ============================================================
      */
     voices_hi: "#E4B9C7",
-    voices:    "#D9A6B5",
-    voices_lo: "#B9798F",
+    voices:    "#a54d68",
+    voices_lo: "#8d1640",
 
     /*
      * ============================================================
@@ -123,9 +132,9 @@ export const categoryColorVariations: Record<
      * ============================================================
      */
 
-    synths_hi: "#B77BD8",
-    synths:    "#9A63C7",
-    synths_lo: "#7544A5",
+    synths_hi: "#c76bf9",
+    synths:    "#8b45c5",
+    synths_lo: "#4d1487",
 
     /*
      * ============================================================

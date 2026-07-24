@@ -11,6 +11,7 @@ const VARIATION_COUNT = 6;
 const ORCHESTRAL_ORDER: InstrumentCategory[] = [
     "woodwinds",
     "brass",
+    "horns",
     "strings",
     "percussion",
     "keyboards",
@@ -151,6 +152,59 @@ function hexToHsl(
         s: s * 100,
         l: l * 100,
     };
+}
+
+
+/* ============================================================
+   RGB → relative luminance
+============================================================ */
+
+/*
+ * Calculate perceived brightness using
+ * the sRGB relative luminance formula.
+ *
+ * Green contributes more strongly to perceived
+ * brightness than red, and blue contributes less.
+ */
+function hexToLuminance(
+    hex: string,
+): number {
+    const value =
+        normalizeHex(hex);
+
+    const channels = [
+        parseInt(
+            value.slice(0, 2),
+            16,
+        ) / 255,
+
+        parseInt(
+            value.slice(2, 4),
+            16,
+        ) / 255,
+
+        parseInt(
+            value.slice(4, 6),
+            16,
+        ) / 255,
+    ].map(
+        channel =>
+            channel <= 0.03928
+                ? channel / 12.92
+                : Math.pow(
+                    (
+                        channel +
+                        0.055
+                    ) / 1.055,
+                    2.4,
+                ),
+    );
+
+    return (
+        0.2126 * channels[0] +
+        0.7152 * channels[1] +
+        0.0722 * channels[2]
+    );
 }
 
 
@@ -313,113 +367,201 @@ function adjustColor(
 
 
 /* ============================================================
+   Column sorting
+============================================================ */
+
+/*
+ * Sort colors from brightest to darkest
+ * according to their perceived luminance.
+ *
+ * This is preferable to sorting by HSL lightness,
+ * since HSL lightness does not account for the fact
+ * that colors such as yellow appear much brighter
+ * than colors such as blue at the same HSL lightness.
+ *
+ * A copy is returned so the original palette
+ * arrays are not mutated.
+ */
+function sortLightToDark(
+    colors: string[],
+): string[] {
+    return [
+        ...colors,
+    ].sort(
+        (
+            a,
+            b,
+        ) =>
+            hexToLuminance(b) -
+            hexToLuminance(a),
+    );
+}
+
+
+/* ============================================================
    Orchestral category columns
 ============================================================ */
 
+/*
+ * Generate a controlled six-step gradient from
+ * the category's base color.
+ *
+ * The hue shifts subtly through the column.
+ * Saturation is increased to keep the colors vivid.
+ *
+ * The final palette is sorted by perceived luminance
+ * rather than by the generated HSL lightness values.
+ */
 function categoryPalette(
     category: InstrumentCategory,
 ): string[] {
-    const high =
-        categoryColorVariations[
-            `${category}_hi`
-        ];
-
     const base =
         categoryColorVariations[
             category
         ];
 
-    const low =
-        categoryColorVariations[
-            `${category}_lo`
-        ];
+    const hsl =
+        hexToHsl(base);
 
-    /*
-     * All colors remain standard RGB here.
-     */
+    const saturation =
+        Math.min(
+            100,
+            hsl.s * 1.25,
+        );
+
+    return sortLightToDark([
+        /*
+         * Light
+         */
+        hslToHex(
+            hsl.h - 4,
+            Math.min(
+                100,
+                saturation * 0.70,
+            ),
+            70,
+        ),
+
+        /*
+         * Medium-light
+         */
+        hslToHex(
+            hsl.h - 2,
+            Math.min(
+                100,
+                saturation * 0.88,
+            ),
+            58,
+        ),
+
+        /*
+         * Category color
+         */
+        hslToHex(
+            hsl.h,
+            saturation,
+            hsl.l,
+        ),
+
+        /*
+         * Saturated dark
+         */
+        hslToHex(
+            hsl.h + 2,
+            Math.min(
+                100,
+                saturation * 1.15,
+            ),
+            42,
+        ),
+
+        /*
+         * Rich dark
+         */
+        hslToHex(
+            hsl.h + 4,
+            Math.min(
+                100,
+                saturation * 1.25,
+            ),
+            35,
+        ),
+
+        /*
+         * Deep, saturated color
+         */
+        hslToHex(
+            hsl.h + 6,
+            Math.min(
+                100,
+                saturation * 1.30,
+            ),
+            29,
+        ),
+    ]);
+}
+
+
+/* ============================================================
+   Neutral gray gradient
+============================================================ */
+
+function grayPalette(): string[] {
     return [
-        /*
-         * High register
-         */
-        high,
-
-        adjustColor(
-            high,
-            {
-                hue: 8,
-                saturation: -18,
-                lightness: 12,
-            },
-        ),
-
-        /*
-         * Main category
-         */
-        base,
-
-        adjustColor(
-            base,
-            {
-                hue: -6,
-                saturation: 18,
-                lightness: -8,
-            },
-        ),
-
-        /*
-         * Low register
-         */
-        low,
-
-        adjustColor(
-            low,
-            {
-                hue: -10,
-                saturation: 20,
-                lightness: -12,
-            },
-        ),
+        "#E0E0E0",
+        "#B8B8B8",
+        "#909090",
+        "#686868",
+        "#404040",
+        "#181818",
     ];
 }
 
 
 /* ============================================================
-   Secondary accent columns
+   Missing hue columns
 ============================================================ */
 
 const ACCENT_COLORS = [
-    "#E85D75",
-    "#F28E5C",
-    "#E6C84A",
-    "#7FBE6A",
-    "#4FAF9B",
-    "#55A9D6",
-    "#6977D8",
-    "#A66BC4",
+    /*
+     * Vibrant pink
+     */
+    "#F50057",
+
+    /*
+     * Apple green
+     */
+    "#55C900",
+
+    /*
+     * Very saturated blue
+     */
+    "#0057FF",
+
+    /*
+     * Very saturated red
+     */
+    "#F00000",
 ];
 
 
 function accentPalette(
     color: string,
 ): string[] {
-    /*
-     * All colors remain standard RGB here.
-     */
     return [
         adjustColor(
             color,
             {
-                saturation: 8,
-                lightness: 18,
+                saturation: 4,
+                lightness: 22,
             },
         ),
 
         adjustColor(
             color,
             {
-                hue: 8,
-                saturation: -8,
-                lightness: 8,
+                saturation: 2,
+                lightness: 11,
             },
         ),
 
@@ -428,29 +570,76 @@ function accentPalette(
         adjustColor(
             color,
             {
-                hue: -6,
+                saturation: 4,
+                lightness: -11,
+            },
+        ),
+
+        adjustColor(
+            color,
+            {
+                saturation: 8,
+                lightness: -22,
+            },
+        ),
+
+        adjustColor(
+            color,
+            {
                 saturation: 12,
-                lightness: -6,
+                lightness: -33,
             },
         ),
+    ];
+}
 
-        adjustColor(
-            color,
-            {
-                hue: -10,
-                saturation: 18,
-                lightness: -16,
-            },
-        ),
 
-        adjustColor(
-            color,
-            {
-                hue: 12,
-                saturation: 24,
-                lightness: -24,
-            },
-        ),
+/* ============================================================
+   Tangerine hue gradient
+============================================================ */
+
+function tangerinePalette(): string[] {
+    return [
+        "#F04400",
+        "#F75C00",
+        "#FF7500",
+        "#FF8C00",
+        "#FFA500",
+        "#FFB800",
+    ];
+}
+
+
+/* ============================================================
+   Blue → green gradient
+============================================================ */
+
+/*
+ * This column intentionally progresses through hue:
+ *
+ *     blue
+ *        ↓
+ *     blue-cyan
+ *        ↓
+ *     cyan-teal
+ *        ↓
+ *     teal
+ *        ↓
+ *     green
+ *        ↓
+ *     apple green
+ *
+ * Unlike the instrument and accent columns,
+ * this is not sorted by luminance.
+ */
+function blueGreenPalette(): string[] {
+    return [
+        "#2457D6",
+        "#247CCB",
+        "#229DB5",
+        "#20B39A",
+        "#36B86A",
+        "#63B82E",
     ];
 }
 
@@ -461,6 +650,9 @@ function accentPalette(
 
 export function makeStudioOneColorPalette(): string[] {
     const columns = [
+        /*
+         * Instrument categories
+         */
         ...ORCHESTRAL_ORDER.map(
             category =>
                 categoryPalette(
@@ -468,12 +660,34 @@ export function makeStudioOneColorPalette(): string[] {
                 ),
         ),
 
+        /*
+         * Neutral gray gradient
+         */
+        grayPalette(),
+
+        /*
+         * Missing hue families
+         */
         ...ACCENT_COLORS.map(
             color =>
-                accentPalette(
-                    color,
+                sortLightToDark(
+                    accentPalette(
+                        color,
+                    ),
                 ),
         ),
+
+        /*
+         * Tangerine:
+         *
+         * red-orange → yellow-orange
+         */
+        tangerinePalette(),
+
+        /*
+         * Blue → green
+         */
+        blueGreenPalette(),
     ];
 
     const palette: string[] = [];
