@@ -11,7 +11,7 @@ export type InstrumentGroup =
     | "celli"
     | "violas"
     | "harp"
-    | "contrabasses"
+    | "double-basses"
     | "keyboard-left"
     | "keyboard-right"
     | "woodwinds"
@@ -65,7 +65,7 @@ const categoryMap: Record<
         "celli",
         "violas",
         "harp",
-        "contrabasses",
+        "double-basses",
     ],
 
     "bowed-strings": [
@@ -73,7 +73,7 @@ const categoryMap: Record<
         "violins-ii",
         "celli",
         "violas",
-        "contrabasses",
+        "double-basses",
     ],
 
     keyboard: [
@@ -112,7 +112,7 @@ const categoryMap: Record<
         "celli",
         "violas",
         "harp",
-        "contrabasses",
+        "double-basses",
         "keyboard-left",
         "keyboard-right",
         "woodwinds",
@@ -182,7 +182,7 @@ const ALL_GROUPS: InstrumentGroup[] = [
     "celli",
     "violas",
     "harp",
-    "contrabasses",
+    "double-basses",
     "keyboard-left",
     "keyboard-right",
     "woodwinds",
@@ -231,7 +231,7 @@ const groupPaths: Record<
         fill: "#E78774",
     },
 
-    contrabasses: {
+    "double-basses": {
         d: "M957.192 595C982.597 595 1003.47 574.333 1000.46 549.108C996.61 516.909 988.726 485.301 976.986 455.005C967.892 431.542 940.155 422.942 917.75 434.399L911.624 437.532C888.79 449.209 880.298 477.246 888.534 501.535C893.801 517.071 897.747 533.011 900.329 549.191C904.332 574.279 924.556 595 949.962 595H957.192Z",
         fill: "#A93636",
     },

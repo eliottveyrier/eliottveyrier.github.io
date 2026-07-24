@@ -62,7 +62,7 @@ const highlightListItem = z.enum([
     "celli",
     "violas",
     "harp",
-    "contrabasses",
+    "double-basses",
     "keyboard-left",
     "keyboard-right",
     "woodwinds",

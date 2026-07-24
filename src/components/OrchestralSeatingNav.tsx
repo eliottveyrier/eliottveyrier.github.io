@@ -14,9 +14,9 @@ const ORCHESTRAL_GROUP_TO_INSTRUMENT: Partial<
     harp: "harp",
     "violins-i": "violins",
     "violins-ii": "violins",
-    violas: "viola",
+    violas: "violas",
     celli: "cello",
-    contrabasses: "double-bass",
+    "double-basses": "double-basses",
 };
 
 const ORCHESTRAL_GROUP_TO_FAMILY: Partial<
@@ -25,7 +25,7 @@ const ORCHESTRAL_GROUP_TO_FAMILY: Partial<
     "keyboard-left": "keyboard",
     "keyboard-right": "keyboard",
     woodwinds: "woodwinds",
-    horns: "brass",
+    horns: "horns",
     brass: "brass",
     percussion: "percussion",
     synths: "synths",
