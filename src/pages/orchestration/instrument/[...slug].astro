@@ -1,8 +1,8 @@
 ---
 import MainLayout from "../../../layouts/MainLayout.astro";
-import OrchestralSeatingNav from "../../../components/orchestration/OrchestralSeatingNav";
 
 import { type CollectionEntry, getCollection, render } from "astro:content";
+import OrchestraNav from "../../../components/orchestration/OrchestraNav";
 
 
 export async function getStaticPaths() {
@@ -34,14 +34,9 @@ const {
 
 <MainLayout title={fullName}>
     <main class="instrument-page">
-        <header class="instrument-header">
-            <h2>{fullName}</h2>
-        </header>
 
         <section class="instrument-seating-chart">
-            <OrchestralSeatingNav client:load
-                highlightList={sittingChartSections}
-            />
+            <OrchestraNav client:load fullName={fullName} highlightList={instrument.data.sittingChartSections} />
         </section>
 
         <article class="instrument-content">
@@ -49,28 +44,3 @@ const {
         </article>
     </main>
 </MainLayout>
-
-<style>
-    .instrument-page {
-        width: min(100% - 2rem, 800px);
-        margin: 0 auto;
-        padding: 3rem 0 6rem;
-    }
-
-    .instrument-header {
-        margin-bottom: 2rem;
-    }
-
-    h2 {
-        margin: 0;
-    }
-
-    .instrument-seating-chart {
-        width: 300;
-        margin: 0;
-    }
-
-    .instrument-content {
-        margin: 0 auto;
-    }
-</style>

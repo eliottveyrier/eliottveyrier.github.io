@@ -35,29 +35,6 @@ export default function OrchestraNav({
 
             <div class="orchestra-nav__info">
                 <h2>{fullName}</h2>
-
-                {visibleMembers &&
-                    visibleMembers.length > 0 && (
-                        <div class="orchestra-nav__members">
-                            <p>Members include:</p>
-
-                            <ul>
-                                {visibleMembers.map(
-                                    (member) => (
-                                        <li key={member}>
-                                            {member}
-                                        </li>
-                                    ),
-                                )}
-                            </ul>
-
-                            {remainingMembers > 0 && (
-                                <span>
-                                    + {remainingMembers} more
-                                </span>
-                            )}
-                        </div>
-                    )}
             </div>
         </section>
     );
