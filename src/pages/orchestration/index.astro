@@ -7,7 +7,7 @@ const families = await getCollection("families");
 const instruments = await getCollection("instruments");
 ---
 
-<MainLayout title="Orchestration" compactTopMargin>
+<MainLayout title="Orchestration" compactTopMargin showBackButton>
     <div class="orchestration-index">
 
         <OrchestraNav client:idle width="300" fullName="Orchestration" category="fx" linkLabelOverride="Home" linkTargetOverride="/"/>
@@ -81,18 +81,6 @@ const instruments = await getCollection("instruments");
 </MainLayout>
 
 <style>
-    .page-header {
-        margin-bottom: 1.5rem;
-    }
-
-    .page-header small {
-        display: block;
-        margin-bottom: 0.25rem;
-    }
-
-    .page-header h1 {
-        margin: 0;
-    }
 
     .orchestration-nav {
         margin-bottom: 2.5rem;
@@ -105,6 +93,7 @@ const instruments = await getCollection("instruments");
 
     .orchestration-sections {
         display: grid;
+        margin-top: 2rem;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 3rem;
     }

@@ -2,10 +2,12 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import { Icon } from "astro-icon/components";
 
 interface Props {
     title: string;
     showNavbar?: boolean;
+    showBackButton?: boolean;
     compactTopMargin?: boolean;
     shortSections?: boolean;
 }
@@ -13,6 +15,7 @@ interface Props {
 const {
     title,
     showNavbar = true,
+    showBackButton = false,
     compactTopMargin = false,
     shortSections = false,
 } = Astro.props;
@@ -28,7 +31,17 @@ const {
     </head>
 
     <body>
-        {showNavbar && <Navbar />}
+        {showNavbar && !showBackButton && <Navbar />}
+
+        {showBackButton && (
+            <a
+                href="/"
+                class="layout-back-button"
+                aria-label="Back to home"
+            >
+                <Icon name="lucide:house" />
+            </a>
+        )}
 
         <main
             class:list={[

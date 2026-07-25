@@ -101,11 +101,13 @@ main {
 
 main.container--compact-top {
     margin-top: 0.5rem;
+    margin-bottom: 2rem;
+
 }
 
 main.container--short-sections > section {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* ============================================================
@@ -436,4 +438,63 @@ html::-webkit-scrollbar-thumb:hover {
     margin-bottom: 1.5rem;
 
     background: var(--border);
+}
+/* ============================================================ */
+/* Home Navigation                                             */
+/* ============================================================ */
+
+.layout-back-button {
+    position: fixed;
+
+    top: 1.5rem;
+    left: 1.5rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 3rem;
+    height: 3rem;
+
+    color: var(--text-muted);
+
+    font-size: 1.5rem;
+    line-height: 1;
+
+    border-radius: var(--radius);
+
+    transition:
+        color var(--transition),
+        background var(--transition),
+        transform var(--transition);
+}
+
+.layout-back-button:hover {
+    color: var(--primary);
+
+    background: var(--surface);
+
+    transform: translateY(-2px);
+}
+
+.layout-back-button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+}
+
+.layout-back-button svg {
+    width: 1em;
+    height: 1em;
+}
+
+@media (min-width: 801px) {
+    .layout-back-button {
+        top: 2rem;
+        left: 2rem;
+
+        width: 3.5rem;
+        height: 3.5rem;
+
+        font-size: 1.75rem;
+    }
 }
