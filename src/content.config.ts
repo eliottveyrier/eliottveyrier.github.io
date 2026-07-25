@@ -93,7 +93,7 @@ const instruments = defineCollection({
 
         category: z.enum([
             "strings",
-            "keyboard",
+            "keyboards",
             "woodwinds",
             "voices",
             "brass",
@@ -122,7 +122,7 @@ const families = defineCollection({
 
         category: z.enum([
             "strings",
-            "keyboard",
+            "keyboards",
             "woodwinds",
             "voices",
             "brass",

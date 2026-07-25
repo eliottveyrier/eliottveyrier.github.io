@@ -1,21 +1,27 @@
 ---
 import MainLayout from "../../../layouts/MainLayout.astro";
 
-import { type CollectionEntry, getCollection, render } from "astro:content";
-import OrchestraNav from "../../../components/orchestration/OrchestraNav";
+import {
+    type CollectionEntry,
+    getCollection,
+    render,
+} from "astro:content";
 
+import OrchestraNav from "../../../components/orchestration/OrchestraNav";
 
 export async function getStaticPaths() {
     const instruments = await getCollection("instruments");
 
-    return instruments.map((instrument : CollectionEntry<"instruments">) => ({
-        params: {
-            slug: instrument.data.slug,
-        },
-        props: {
-            instrument,
-        },
-    }));
+    return instruments.map(
+        (instrument: CollectionEntry<"instruments">) => ({
+            params: {
+                slug: instrument.data.slug,
+            },
+            props: {
+                instrument,
+            },
+        }),
+    );
 }
 
 interface Props {
@@ -23,6 +29,15 @@ interface Props {
 }
 
 const { instrument } = Astro.props;
+
+const families = await getCollection("families");
+
+const family = instrument.data.family
+    ? families.find(
+          (family) =>
+              family.data.slug === instrument.data.family,
+      )
+    : undefined;
 
 const { Content } = await render(instrument);
 
@@ -34,9 +49,15 @@ const {
 
 <MainLayout title={fullName}>
     <main class="instrument-page">
-
         <section class="instrument-seating-chart">
-            <OrchestraNav client:load fullName={fullName} highlightList={instrument.data.sittingChartSections} />
+            <OrchestraNav
+                client:load
+                fullName={fullName}
+                highlightList={sittingChartSections}
+                family={instrument.data.family}
+                familyLabel={family?.data.fullName}
+                category={instrument.data.category}
+            />
         </section>
 
         <article class="instrument-content">

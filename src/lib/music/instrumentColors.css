@@ -1,47 +1,97 @@
+/* ============================================================
+   Woodwinds
+============================================================ */
+
 .instrument-color-woodwinds {
-    --note-color-light: oklch(0.80 0.12 65);
-    --note-color:       oklch(0.65 0.16 65);
-    --note-color-dark:  oklch(0.45 0.13 65);
+    --note-color-light: #6D9AC8;
+    --note-color:       #4F82B8;
+    --note-color-dark:  #1E65B1;
 }
+
+
+/* ============================================================
+   Brass
+============================================================ */
 
 .instrument-color-brass {
-    --note-color-light: oklch(0.88 0.16 95);
-    --note-color:       oklch(0.76 0.18 95);
-    --note-color-dark:  oklch(0.52 0.16 95);
+    --note-color-light: #FFE58A;
+    --note-color:       #F2C230;
+    --note-color-dark:  #C99600;
 }
+
+
+/* ============================================================
+   Horns
+============================================================ */
+
+.instrument-color-horns {
+    --note-color-light: #D98A2B;
+    --note-color:       #A95F16;
+    --note-color-dark:  #71350D;
+}
+
+
+/* ============================================================
+   Strings
+============================================================ */
 
 .instrument-color-strings {
-    --note-color-light: oklch(0.80 0.14 25);
-    --note-color:       oklch(0.65 0.20 25);
-    --note-color-dark:  oklch(0.45 0.16 25);
+    --note-color-light: #E62929;
+    --note-color:       #C72F2F;
+    --note-color-dark:  #AF2222;
 }
+
+
+/* ============================================================
+   Percussion
+============================================================ */
 
 .instrument-color-percussion {
-    --note-color-light: oklch(0.80 0.14 230);
-    --note-color:       oklch(0.65 0.18 230);
-    --note-color-dark:  oklch(0.45 0.15 230);
+    --note-color-light: #4AD29E;
+    --note-color:       #5FAF9A;
+    --note-color-dark:  #32A07F;
 }
+
+
+/* ============================================================
+   Keyboards
+============================================================ */
 
 .instrument-color-keyboards {
-    --note-color-light: oklch(0.80 0.12 145);
-    --note-color:       oklch(0.65 0.15 145);
-    --note-color-dark:  oklch(0.45 0.12 145);
+    --note-color-light: #7BC486;
+    --note-color:       #5FA66A;
+    --note-color-dark:  #248434;
 }
+
+
+/* ============================================================
+   Voices
+============================================================ */
 
 .instrument-color-voices {
-    --note-color-light: oklch(0.979 0.035 355);
-    --note-color:       oklch(0.865 0.055 355);
-    --note-color-dark:  oklch(0.559 0.035 355);
+    --note-color-light: #E4B9C7;
+    --note-color:       #A54D68;
+    --note-color-dark:  #8D1640;
 }
+
+
+/* ============================================================
+   Synths
+============================================================ */
 
 .instrument-color-synths {
-    --note-color-light: oklch(0.80 0.12 300);
-    --note-color:       oklch(0.65 0.18 300);
-    --note-color-dark:  oklch(0.45 0.15 300);
+    --note-color-light: #C76BF9;
+    --note-color:       #8B45C5;
+    --note-color-dark:  #4D1487;
 }
 
+
+/* ============================================================
+   FX
+============================================================ */
+
 .instrument-color-fx {
-    --note-color-light: oklch(0.80 0.12 300);
-    --note-color:       oklch(0.65 0.18 300);
-    --note-color-dark:  oklch(0.45 0.15 300);
+    --note-color-light: #C7D5E8;
+    --note-color:       #A1B5D8;
+    --note-color-dark:  #7188AA;
 }
