@@ -6,11 +6,15 @@ import "../styles/global.css";
 interface Props {
     title: string;
     showNavbar?: boolean;
+    compactTopMargin?: boolean;
+    shortSections?: boolean;
 }
 
 const {
     title,
     showNavbar = true,
+    compactTopMargin = false,
+    shortSections = false,
 } = Astro.props;
 ---
 
@@ -26,7 +30,15 @@ const {
     <body>
         {showNavbar && <Navbar />}
 
-        <main class="container">
+        <main
+            class:list={[
+                "container",
+                {
+                    "container--compact-top": compactTopMargin,
+                    "container--short-sections": shortSections,
+                },
+            ]}
+        >
             <slot />
         </main>
 

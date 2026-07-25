@@ -14,6 +14,8 @@ type OrchestraNavProps = ComponentProps<
     category: InstrumentCategory;
     family?: string;
     familyLabel?: string;
+    linkTargetOverride?: string;
+    linkLabelOverride?: string;
     members?: string[];
 };
 
@@ -24,25 +26,17 @@ export default function OrchestraNav({
     category,
     family,
     familyLabel,
+    linkTargetOverride,
+    linkLabelOverride,
     members,
     ...props
 }: OrchestraNavProps) {
-    const visibleMembers = members?.slice(
-        0,
-        MAX_VISIBLE_MEMBERS,
-    );
 
-    const remainingMembers =
-        members &&
-        members.length > MAX_VISIBLE_MEMBERS
-            ? members.length - MAX_VISIBLE_MEMBERS
-            : 0;
-
-    const linkTarget = family
+    const linkTarget = linkTargetOverride ?? (family
         ? `/orchestration/family/${family}`
-        : "/orchestration/";
+        : "/orchestration/");
 
-    const linkLabel = familyLabel ?? family ?? "orchestra";
+    const linkLabel = linkLabelOverride ?? familyLabel ?? family ?? "orchestra";
 
     return (
         <section

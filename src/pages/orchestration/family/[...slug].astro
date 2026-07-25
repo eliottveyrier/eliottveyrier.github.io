@@ -33,10 +33,10 @@ const {
 } = family.data;
 ---
 
-<MainLayout title={fullName}>
+<MainLayout title={fullName} compactTopMargin>
     <main class="family-page">
         <section class="family-seating-chart">
-            <OrchestraNav client:load fullName={fullName} members={family.data.members} highlightList={family.data.sittingChartSections} category={family.data.category} />
+            <OrchestraNav client:idle fullName={fullName} members={family.data.members} highlightList={family.data.sittingChartSections} category={family.data.category} />
         </section>
 
         <article class="family-content">

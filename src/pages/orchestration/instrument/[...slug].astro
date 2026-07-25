@@ -47,11 +47,11 @@ const {
 } = instrument.data;
 ---
 
-<MainLayout title={fullName}>
+<MainLayout title={fullName} compactTopMargin>
     <main class="instrument-page">
         <section class="instrument-seating-chart">
             <OrchestraNav
-                client:load
+                client:idle
                 fullName={fullName}
                 highlightList={sittingChartSections}
                 family={instrument.data.family}

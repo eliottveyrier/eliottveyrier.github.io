@@ -307,12 +307,10 @@ const OrchestraSVG = ({
     ): string => {
         const classes = ["instrument-group"];
 
-        if (hasHighlights) {
-            if (highlightedGroups.has(groupId)) {
-                classes.push(highlightClassName);
-            } else {
-                classes.push(mutedClassName);
-            }
+        if (highlightedGroups.has(groupId)) {
+            classes.push(highlightClassName);
+        } else {
+            classes.push(mutedClassName);
         }
 
         return classes.join(" ");

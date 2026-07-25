@@ -1,19 +1,16 @@
 ---
 import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
-import OrchestralSeatingNav from "../../components/orchestration/OrchestralSeatingNav";
+import OrchestraNav from "../../components/orchestration/OrchestraNav";
 
 const families = await getCollection("families");
 const instruments = await getCollection("instruments");
 ---
 
-<MainLayout title="Orchestration">
+<MainLayout title="Orchestration" compactTopMargin>
     <div class="orchestration-index">
-        <header class="page-header">
-            <h1>Orchestration</h1>
-        </header>
 
-        <OrchestralSeatingNav client:load width="300" highlightList={[]}/>
+        <OrchestraNav client:idle width="300" fullName="Orchestration" category="fx" linkLabelOverride="Home" linkTargetOverride="/"/>
 
         <div class="orchestration-sections">
             <section class="orchestration-section">

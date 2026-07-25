@@ -67,7 +67,7 @@
 .orchestra-nav__chart .orchestra-svg {
     display: block;
 
-    width: min(100%, 36rem);
+    width: min(100%, 18rem);
     height: auto;
 }
 /* ============================================================
@@ -208,8 +208,6 @@
 
 .orchestra-nav__members > span {
     display: block;
-
-    margin-top: 0.75rem;
 
     color: var(--text-muted);
 
