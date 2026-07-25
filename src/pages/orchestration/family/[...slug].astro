@@ -36,7 +36,7 @@ const {
 <MainLayout title={fullName}>
     <main class="family-page">
         <section class="family-seating-chart">
-            <OrchestraNav client:load fullName={fullName} members={family.data.members} />
+            <OrchestraNav client:load fullName={fullName} members={family.data.members} highlightList={[family.data.category]} />
         </section>
 
         <article class="family-content">
