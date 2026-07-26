@@ -1,0 +1,241 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+import ChordScore from "../components/ChordScore";
+import InstrumentTuningScore from "../components/InstrumentTuningScore";
+import InstrumentRangeScore from "../components/InstrumentRangeScore";
+import OrchestralChordScore from "../components/OrchestralChordScore";
+---
+
+<MainLayout title="Score Display Tests">
+    <main class="score-tests">
+        <h1>Score Display Tests</h1>
+
+        <h2>ChordScore</h2>
+
+        <h3>C major</h3>
+
+        <ChordScore
+            client:only
+            notes={[
+                "C4",
+                "E4",
+                "G4",
+            ]}
+        />
+
+        <h3>G major</h3>
+
+        <ChordScore
+            client:only
+            notes={[
+                "G3",
+                "B3",
+                "D4",
+                "G4",
+            ]}
+        />
+
+        <h3>Split between staves</h3>
+
+        <ChordScore
+            client:only
+            notes={[
+                "C3",
+                "G3",
+                "C4",
+                "E4",
+                "G4",
+            ]}
+        />
+
+        <h3>Custom breaking point</h3>
+
+        <ChordScore
+            client:only
+            breakingPoint="E4"
+            notes={[
+                "C3",
+                "G3",
+                "C4",
+                "E4",
+                "G4",
+            ]}
+        />
+
+        <h2>InstrumentTuningScore</h2>
+
+        <h3>Violin</h3>
+
+        <InstrumentTuningScore
+            client:only
+            tuning={[
+                "G3",
+                "D4",
+                "A4",
+                "E5",
+            ]}
+            clef="treble"
+        />
+
+        <h3>Viola</h3>
+
+        <InstrumentTuningScore
+            client:only
+            tuning={[
+                "C3",
+                "G3",
+                "D4",
+                "A4",
+            ]}
+            clef="alto"
+        />
+
+        <h3>Cello</h3>
+
+        <InstrumentTuningScore
+            client:only
+            tuning={[
+                "C2",
+                "G2",
+                "D3",
+                "A3",
+            ]}
+            clef="bass"
+        />
+
+        <h3>Guitar</h3>
+
+        <InstrumentTuningScore
+            client:only
+            tuning={[
+                "E3",
+                "A3",
+                "D4",
+                "G4",
+                "B4",
+                "E5",
+            ]}
+            clef="treble"
+        />
+
+        <h2>Accidentals</h2>
+
+        <h3>Chromatic notes</h3>
+
+        <InstrumentTuningScore
+            client:only
+            tuning={[
+                "C#4",
+                "Eb4",
+                "F#4",
+                "Ab4",
+            ]}
+            clef="treble"
+        />
+
+        <h3>Low register</h3>
+
+        <InstrumentTuningScore
+            client:only
+            tuning={[
+                "C2",
+                "F#2",
+                "Bb2",
+                "E3",
+            ]}
+            clef="bass"
+        />
+
+        <h2>InstrumentRangeScore</h2>
+
+        <h3>Violin</h3>
+
+        <InstrumentRangeScore
+            client:only
+            range={[
+                {
+                    note: "G3",
+                    clef: "treble",
+                },
+                {
+                    note: "E7",
+                    clef: "treble",
+                    octava: 1
+                },
+            ]}
+        />
+
+        <h3>Cello</h3>
+
+        <InstrumentRangeScore
+            client:only
+            range={[
+                {
+                    note: "C2",
+                    clef: "bass",
+                },
+                {
+                    note: "A5",
+                    clef: "treble",
+                },
+            ]}
+        />
+
+        <h3>Range crossing clefs</h3>
+
+        <InstrumentRangeScore
+            client:only
+            range={[
+                {
+                    note: "A2",
+                    clef: "bass",
+                },
+                {
+                    note: "C4",
+                    clef: "treble",
+                },
+            ]}
+        />
+
+        <h3>Multiple range points</h3>
+
+        <InstrumentRangeScore
+            client:only
+            range={[
+                {
+                    note: "C2",
+                    clef: "bass",
+                },
+                {
+                    note: "C3",
+                    clef: "bass",
+                },
+                {
+                    note: "C4",
+                    clef: "treble",
+                },
+                {
+                    note: "C5",
+                    clef: "treble",
+                },
+            ]}
+        />
+    </main>
+</MainLayout>
+
+<style>
+.score-tests h1 {
+    margin-bottom: 2rem;
+}
+
+.score-tests h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.score-tests h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+}
+</style>
