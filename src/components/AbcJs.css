@@ -3,10 +3,10 @@
 /* ============================================================ */
 
 .abcjs-score {
-    max-width: 20%;
-    min-width: 100;
+    max-width: 30%;
+    min-width: 200;
     margin: 2rem auto;
-    padding: 0.5rem 0.5rem;
+    padding: 0.1rem 0.1rem;
     color: black;
     background: var(--score-background);
 
@@ -37,4 +37,10 @@
 
 .no-selection .abcjs-note_selected {
     fill: black;
+}
+
+@media (max-width: 600px) {
+    .abcjs-score {
+        max-width: 50%;
+    }
 }

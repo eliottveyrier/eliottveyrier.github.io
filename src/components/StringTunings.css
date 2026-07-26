@@ -1,0 +1,98 @@
+/* ============================================================ */
+/* ABCJS Score                                                   */
+/* ============================================================ */
+
+
+/* ============================================================ */
+/* String Tunings                                                */
+/* ============================================================ */
+
+.string-tunings {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    width: 100%;
+    max-width: 760px;
+
+    margin: 1.5rem auto;
+
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+}
+
+
+/* ============================================================ */
+/* Individual Tuning                                             */
+/* ============================================================ */
+
+.string-tuning {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-width: 0;
+
+    padding: 1rem 0.75rem;
+
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* ============================================================ */
+/* Instrument Name                                               */
+/* ============================================================ */
+
+.string-tuning h3 {
+    width: 100%;
+
+    margin: 0 0 0.5rem;
+
+    color: var(--accent);
+
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+
+/* ============================================================ */
+/* Score Inside Tuning Grid                                      */
+/* ============================================================ */
+
+.string-tuning .abcjs-score {
+    width: 100%;
+    max-width: 70%;
+    min-width: 0;
+
+    margin: 0;
+
+    box-shadow: none;
+
+    overflow-x: auto;
+}
+
+.string-tuning .abcjs-score__content {
+    width: max-content;
+    min-width: 100%;
+}
+
+.string-tuning .abcjs-score svg {
+    width: auto;
+    max-width: none;
+}
+
+
+/* ============================================================ */
+/* Mobile                                                         */
+/* ============================================================ */
+
+@media (max-width: 600px) {
+    .string-tunings {
+        grid-template-columns: 1fr;
+    }
+
+    .string-tuning .abcjs-score {
+        max-width: 100%;
+    }
+}

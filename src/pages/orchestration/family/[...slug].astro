@@ -39,8 +39,15 @@ const {
             <OrchestraNav client:idle fullName={fullName} members={family.data.members} highlightList={family.data.sittingChartSections} category={family.data.category} />
         </section>
 
-        <article class="family-content">
+        <article class="family-content content">
             <Content />
         </article>
     </main>
 </MainLayout>
+
+<style>
+    .content {
+        max-width: 800;
+        margin-inline: auto;
+    }
+</style>

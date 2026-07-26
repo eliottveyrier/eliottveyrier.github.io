@@ -15,5 +15,17 @@ stringTuning:
 ---
 
 import NoteSpan from "../../../components/mtheory/NoteSpan"
+import InstrumentTuningScore from "../../../components/InstrumentTuningScore"
 
 ### Range and tuning
+
+<InstrumentTuningScore
+    client:only
+    tuning={[
+        "E2", // Written pitch
+        "A2",
+        "D3",
+        "G3",
+    ]}
+    clef="bass"
+/>

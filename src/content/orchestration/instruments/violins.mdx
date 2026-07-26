@@ -16,8 +16,20 @@ stringTuning:
 ---
 
 import NoteSpan from "../../../components/mtheory/NoteSpan"
+import InstrumentTuningScore from "../../../components/InstrumentTuningScore"
 
 ### Range and tuning
+
+<InstrumentTuningScore
+    client:only
+    tuning={[
+        "G3",
+        "D4",
+        "A4",
+        "E5",
+    ]}
+    clef="treble"
+/>
 
 The practical range of the violin in an orchestra ranges from <NoteSpan note="G3" /> up to <NoteSpan note="E7"/>. 
 In the classical era, the upper limit was considered to be <NoteSpan note="A7"/> [^1]
