@@ -34,3 +34,7 @@
 
     max-width: none;
 }
+
+.no-selection .abcjs-note_selected {
+    fill: black;
+}
