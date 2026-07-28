@@ -19,8 +19,6 @@ type OrchestraNavProps = ComponentProps<
     members?: string[];
 };
 
-const MAX_VISIBLE_MEMBERS = 10;
-
 export default function OrchestraNav({
     fullName,
     category,
