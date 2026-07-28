@@ -37,7 +37,7 @@ V:main clef=${clef}
             className={`instrument-tuning-score no-selection ${
                 divProps.className ?? ""
             }`}
-            renderParams={{
+            visualParams={{
                 responsive: "resize",
                 staffwidth: 150,
             }}

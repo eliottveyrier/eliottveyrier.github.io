@@ -63,7 +63,7 @@ ${makeChord(trebleNotes)}`;
         <Abcjs
             {...divProps}
             className={`chord-score no-selection ${divProps.className ?? ""}`}
-            renderParams={{
+            visualParams={{
                 responsive: "resize",
                 staffwidth: 150,
             }}

@@ -6,13 +6,12 @@ import "./AbcJs.css";
 
 interface AbcjsProps extends ComponentProps<"div"> {
   abcNotation?: string;
-  engraverParams?: object;
-  renderParams?: AbcVisualParams;
+  visualParams?: AbcVisualParams;
 }
 
 export default function Abcjs({
   abcNotation = "",
-  renderParams = {},
+  visualParams = {},
   ...divProps
 }: AbcjsProps) {
   const uniqueNumber = useRef(Date.now() + Math.random());
@@ -31,7 +30,7 @@ export default function Abcjs({
     abcjsObj.renderAbc(
       resultId,
       abcNotation,
-      renderParams,
+      visualParams,
     );
   }, [abcNotation]);
 
