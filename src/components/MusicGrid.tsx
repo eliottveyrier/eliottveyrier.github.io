@@ -125,6 +125,7 @@ function PreviewVideo({ selected, previewRef }: PreviewVideoProps) {
                 {selected.data.youtube_id && 
                     <YoutubeVideo
                         id={selected.data.youtube_id}
+                        title={`Video for ${selected.data.title}`}
                     />
                 }
                 {selected.data.google_drive_id && !selected.data.youtube_id && (
