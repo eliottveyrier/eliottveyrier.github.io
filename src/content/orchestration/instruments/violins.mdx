@@ -17,6 +17,8 @@ stringTuning:
 
 import NoteSpan from "../../../components/mtheory/NoteSpan"
 import InstrumentTuningScore from "../../../components/InstrumentTuningScore"
+import InstrumentRangeScore from "../../../components/InstrumentRangeScore"
+
 
 ### Range and tuning
 
@@ -31,8 +33,10 @@ import InstrumentTuningScore from "../../../components/InstrumentTuningScore"
     clef="treble"
 />
 
+<InstrumentRangeScore client:only="preact" range={[{note: "G3", clef: "treble"}, {note: "A6", clef: "treble", octava: 1}, {note: "E7", clef: "treble", octava: 1}]} />
+
 The practical range of the violin in an orchestra ranges from <NoteSpan note="G3" /> up to <NoteSpan note="E7"/>. 
-In the classical era, the upper limit was considered to be <NoteSpan note="A7"/> [^1]
+In the classical era, the upper limit was considered to be <NoteSpan note="A6"/> [^1]
 
 On a given string, two octaves is a good limit, with an octave and a fifth being a more comfortable range.
 
