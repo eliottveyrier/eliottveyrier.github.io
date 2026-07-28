@@ -13,6 +13,7 @@ import StudioOnePaletteDownload
     from "../../components/music/StudioOnePaletteDownload.astro";
 
 import OrchestralSeatingChart from "../../components/orchestration/OrchestralSeatingChart"
+import StudioOnePalettePreview from "../../components/StudioOnePalettePreview.astro";
 
 const categories: InstrumentCategory[] = [
     "woodwinds",
@@ -42,12 +43,12 @@ const labels: Record<InstrumentCategory, string> = {
     <MarkdownContainer>
         <h1>Instrument colors</h1>
 
+        <OrchestralSeatingChart highlightList={["all"]} width={"50%"}/>
         <p>
             I keep forgetting which color I usually use for what instrument...
             This could help!
         </p>
 
-        <OrchestralSeatingChart highlightList={["violins-i"]} width={"100%"}/>
 
         <div class="color-grid">
             {
@@ -82,7 +83,12 @@ const labels: Record<InstrumentCategory, string> = {
                 })
             }
         </div>
-    <StudioOnePaletteDownload/>
+        <StudioOnePaletteDownload/>
+        <p>
+            You can download my palette for studio one with the button above if you like it :
+        </p>
+    <StudioOnePalettePreview/>
+    
     </MarkdownContainer>
 </MainLayout>
 

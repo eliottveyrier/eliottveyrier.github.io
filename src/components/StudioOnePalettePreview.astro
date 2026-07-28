@@ -1,11 +1,11 @@
 ---
-import MainLayout from "../../layouts/MainLayout.astro";
-import MarkdownContainer from "../../components/MarkdownContainer.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import MarkdownContainer from "../components/MarkdownContainer.astro";
 
 import {
     makeStudioOneColorPalette,
     studioOneToCssColor,
-} from "../../lib/music/makeStudioOneColorPalete";
+} from "../lib/music/makeStudioOneColorPalete";
 
 
 const palette =
@@ -30,52 +30,29 @@ const rows = Array.from(
 ---
 
 
-<MainLayout
-    title="Studio One Palette Debug"
-    showNavbar={true}
->
-    <MarkdownContainer>
-        <h1>Studio One Palette</h1>
-
-        <p>
-            Debug preview of the generated
-            <code>.colorpalette</code>.
-        </p>
-
-        <div class="palette">
-            {
-                rows.map((row) =>
-                    row.map((color: string) => (
-                        <div
-                            class="color-cell"
-                            style={{
-                                backgroundColor:
-                                    studioOneToCssColor(
-                                        color,
-                                    ),
-                            }}
-                            title={color}
-                        >
-                            <span>
-                                {color}
-                            </span>
-                        </div>
-                    )),
-                )
-            }
-        </div>
-
-        <h2>Generated colors</h2>
-
-        <pre>{JSON.stringify(
-            {
-                colors: palette,
-            },
-            null,
-            4,
-        )}</pre>
-    </MarkdownContainer>
-</MainLayout>
+    
+<div class="palette">
+    {
+        rows.map((row) =>
+            row.map((color: string) => (
+                <div
+                    class="color-cell"
+                    style={{
+                        backgroundColor:
+                            studioOneToCssColor(
+                                color,
+                            ),
+                    }}
+                    title={color}
+                >
+                    <span>
+                        {color}
+                    </span>
+                </div>
+            )),
+        )
+    }
+</div>
 
 
 <style>
