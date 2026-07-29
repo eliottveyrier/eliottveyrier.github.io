@@ -2,34 +2,83 @@
 import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
 import OrchestraNav from "../../components/orchestration/OrchestraNav";
+import InstrumentSpan from "../../components/mtheory/InstrumentSpan";
 
 const families = await getCollection("families");
 const instruments = await getCollection("instruments");
+
+const categoryOrder = [
+    "woodwinds",
+    "horns",
+    "brass",
+    "percussion",
+    "keyboards",
+    "voices",
+    "synths",
+    "strings",
+    "fx",
+];
+
+function sortByCategory<T extends {
+    id: string;
+    data: {
+        category: string;
+        fullName?: string;
+    };
+}>(items: T[]) {
+    return items.sort((a, b) => {
+        const categoryA = categoryOrder.indexOf(a.data.category);
+        const categoryB = categoryOrder.indexOf(b.data.category);
+
+        const categoryComparison =
+            (categoryA === -1 ? Infinity : categoryA) -
+            (categoryB === -1 ? Infinity : categoryB);
+
+        if (categoryComparison !== 0) {
+            return categoryComparison;
+        }
+
+        return (a.data.fullName ?? a.id).localeCompare(
+            b.data.fullName ?? b.id
+        );
+    });
+}
+
+const sortedFamilies = sortByCategory([...families]);
+const sortedInstruments = sortByCategory([...instruments]);
 ---
 
 <MainLayout title="Orchestration" compactTopMargin showBackButton>
     <div class="orchestration-index">
 
-        <OrchestraNav client:idle width="300" fullName="Orchestration" category="fx" linkLabelOverride="Home" linkTargetOverride="/"/>
+        <OrchestraNav
+            client:idle
+            width="300"
+            fullName="Orchestration"
+            category="fx"
+            linkLabelOverride="Home"
+            linkTargetOverride="/"
+        />
 
         <div class="orchestration-sections">
+
             <section class="orchestration-section">
                 <div class="section-header">
-                    <span class="section-number">01</span>
                     <h2>Families</h2>
                 </div>
 
-                {families.length > 0 ? (
+                {sortedFamilies.length > 0 ? (
                     <ul class="orchestration-list">
-                        {families.map((item) => (
+                        {sortedFamilies.map((item) => (
                             <li>
                                 {item.data.slug ? (
                                     <a
                                         href={`/orchestration/family/${item.data.slug}`}
                                     >
-                                        <span>
+                                        <InstrumentSpan category={item.data.category}>
                                             {item.data.fullName ?? item.id}
-                                        </span>
+                                        </InstrumentSpan>
+
                                         <span class="arrow">↗</span>
                                     </a>
                                 ) : (
@@ -45,23 +94,24 @@ const instruments = await getCollection("instruments");
                 )}
             </section>
 
+
             <section class="orchestration-section">
                 <div class="section-header">
-                    <span class="section-number">02</span>
                     <h2>Instruments</h2>
                 </div>
 
-                {instruments.length > 0 ? (
+                {sortedInstruments.length > 0 ? (
                     <ul class="orchestration-list">
-                        {instruments.map((item) => (
+                        {sortedInstruments.map((item) => (
                             <li>
                                 {item.data.slug ? (
                                     <a
                                         href={`/orchestration/instrument/${item.data.slug}`}
                                     >
-                                        <span>
+                                        <InstrumentSpan category={item.data.category}>
                                             {item.data.fullName ?? item.id}
-                                        </span>
+                                        </InstrumentSpan>
+
                                         <span class="arrow">↗</span>
                                     </a>
                                 ) : (
@@ -76,9 +126,11 @@ const instruments = await getCollection("instruments");
                     <p>No instruments found.</p>
                 )}
             </section>
+
         </div>
     </div>
 </MainLayout>
+
 
 <style>
 
@@ -91,16 +143,21 @@ const instruments = await getCollection("instruments");
         border-radius: var(--radius);
     }
 
+
     .orchestration-sections {
         display: grid;
+
         margin-top: 2rem;
+
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 3rem;
     }
 
+
     .orchestration-section {
         margin: 0;
     }
+
 
     .section-header {
         display: flex;
@@ -113,16 +170,20 @@ const instruments = await getCollection("instruments");
         border-bottom: 1px solid var(--border);
     }
 
+
     .section-header h2 {
         margin: 0;
         font-size: 1.5rem;
     }
 
+
     .section-number {
         color: var(--accent);
+
         font-family: monospace;
         font-size: 0.75rem;
     }
+
 
     .orchestration-list {
         display: flex;
@@ -134,6 +195,7 @@ const instruments = await getCollection("instruments");
         list-style: none;
     }
 
+
     .orchestration-list li {
         border-bottom: 1px solid color-mix(
             in srgb,
@@ -142,11 +204,13 @@ const instruments = await getCollection("instruments");
         );
     }
 
+
     .orchestration-list a,
     .orchestration-list li > span {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         gap: 1rem;
 
         padding: 0.5rem;
@@ -154,12 +218,14 @@ const instruments = await getCollection("instruments");
         color: var(--text);
     }
 
+
     .orchestration-list a {
         transition:
             color var(--transition),
             padding-left var(--transition),
             background var(--transition);
     }
+
 
     .orchestration-list a:hover {
         padding-left: 0.75rem;
@@ -171,8 +237,10 @@ const instruments = await getCollection("instruments");
         );
     }
 
+
     .arrow {
         color: var(--accent);
+
         opacity: 0;
 
         transform: translate(-0.25rem, 0.25rem);
@@ -182,12 +250,15 @@ const instruments = await getCollection("instruments");
             transform var(--transition);
     }
 
+
     .orchestration-list a:hover .arrow {
         opacity: 1;
         transform: translate(0, 0);
     }
 
+
     @media (max-width: 700px) {
+
         .orchestration-nav {
             padding: 0.5rem;
         }
@@ -196,5 +267,7 @@ const instruments = await getCollection("instruments");
             grid-template-columns: 1fr;
             gap: 2rem;
         }
+
     }
+
 </style>
