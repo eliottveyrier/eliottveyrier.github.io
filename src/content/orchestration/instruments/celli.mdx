@@ -13,12 +13,10 @@ stringTuning:
 - D3
 - A3
 ---
+import NoteSpan from "../../../components/mtheory/NoteSpan"
+import InstrumentSpecsCard from "../../../components/InstrumentSpecsCard"
 
-import InstrumentTuningScore from "../../../components/InstrumentTuningScore"
-
-### Range and tuning
-
-<InstrumentTuningScore
+<InstrumentSpecsCard
     client:only="preact"
     tuning={[
         "C2",
@@ -26,5 +24,30 @@ import InstrumentTuningScore from "../../../components/InstrumentTuningScore"
         "D3",
         "A3",
     ]}
-    clef="bass"
-/>
+    tuningClef="bass"
+
+    range="C2-A5"
+    comfortableRange="C2-F5"
+
+    rangeStart={{
+        note: "C2",
+        clef: "bass",
+    }}
+
+    comfortableTop={{
+        note: "F5",
+        clef: "tenor",
+    }}
+
+    maxEnd={{
+        note: "A5",
+        clef: "treble",
+    }}
+>
+The practical range of the cello in an orchestra ranges from <NoteSpan note="C2" /> up to <NoteSpan note="A5" />.
+
+The cello uses bass clef in its lower register, tenor clef in the middle register, and treble clef for high passages.
+
+The comfortable orchestral range extends roughly to <NoteSpan note="F5" />, while advanced repertoire can reach considerably higher.
+
+</InstrumentSpecsCard>

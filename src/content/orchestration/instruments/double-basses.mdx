@@ -15,17 +15,42 @@ stringTuning:
 ---
 
 import NoteSpan from "../../../components/mtheory/NoteSpan"
-import InstrumentTuningScore from "../../../components/InstrumentTuningScore"
+import InstrumentSpecsCard from "../../../components/InstrumentSpecsCard"
 
-### Range and tuning
-
-<InstrumentTuningScore
+<InstrumentSpecsCard
     client:only="preact"
     tuning={[
-        "E2", // Written pitch
+        "E2",
         "A2",
         "D3",
         "G3",
     ]}
-    clef="bass"
-/>
+    tuningClef="bass"
+
+    range="E1-C5"
+    comfortableRange="E1-G4"
+
+    rangeStart={{
+        note: "E2",
+        clef: "bass",
+    }}
+
+    comfortableTop={{
+        note: "G4",
+        clef: "bass",
+    }}
+
+    maxEnd={{
+        note: "C5",
+        clef: "bass",
+    }}
+>
+The practical range of the double bass in an orchestra ranges from <NoteSpan note="E1" /> up to <NoteSpan note="C5" />.
+
+The double bass is normally written in bass clef and sounds one octave lower than written.
+
+Its comfortable orchestral range extends approximately to <NoteSpan note="G4" />, with higher passages requiring more advanced technique.
+
+</InstrumentSpecsCard>
+
+

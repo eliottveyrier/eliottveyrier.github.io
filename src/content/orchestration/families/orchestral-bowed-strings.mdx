@@ -16,6 +16,7 @@ members:
 ---
 import StringTunings from "../../../components/StringTunings"
 import NoteSpan from "../../../components/mtheory/NoteSpan"
+import YTVideoExample from "../../../components/YTVideoExample.astro"
 
 
 
@@ -25,29 +26,28 @@ The violin family has many advantages and was the first to be fully developed.
 Namely :
 
 - a gigantic range covering 7 octaves from <NoteSpan note="E1"/> or <NoteSpan note="C1"/> to <NoteSpan note="E7"/>
-- its homogeneous tone color throughout its entire range
+- its **homogeneous** tone color throughout its entire range
 - wide dynamic range
 - a richness of tone quality and expressivity
 - versatility
 - its ability to sound continuously, without breathing
 
-### Usual section sizes
+### Usual section sizes in a modern orchestra
 
-first violins : 8 or 9 stands of two players each (16 to 18 players)
+| Section        | Stands | Total players |
+| -------------- | -----: | ------------: |
+| First violins  |    8–9 |         16–18 |
+| Second violins |    7–8 |         14–16 |
+| Violas         |    5–6 |         10–12 |
+| Cellos         |    5–6 |         10–12 |
+| Double basses  |    4–5 |          8–10 |
 
-second violins : 7 or 8 stands of two players each (14 to 16 players)
 
-violas : 5 or 6 stands of two players each (10 to 12 players)
-
-cellos : 5 or 6 stands of two players each (10 to 12 players)
-
-double basses : 4 or 5 stands of two players each (8 to 10 players)
-
-## Tuning
+### Tuning
 
 <StringTunings client:only="preact" />
 
-## Divided Strings
+### Divided Strings
 
 Two lines at the same time are often marked *divisi*, implying the *outside* player (sitting right-side of the stand)
 plays the top note, with the *inside* player plays the lower notes.
@@ -55,3 +55,22 @@ plays the top note, with the *inside* player plays the lower notes.
 no *divisi* marking implies that the part is played with double stops.
 *non-div* can ensure there is no ambiguity in that case.
 
+## Examples
+
+<YTVideoExample
+    id="ux3Z3yAK-UE"
+    startTime={78}
+>
+
+String techniques comparison, *String Techniques with David Alberman* - LSO
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="fkYPwbeh9VM"
+    startTime={2403}
+>
+
+The rare **Octobass** in *Messe solennelle de Sainte-Cécile* — Charles Gounod
+
+</YTVideoExample>

@@ -4,11 +4,11 @@ import { Note } from "tonal";
 import Abcjs from "./AbcJs";
 import { noteToAbc } from "../lib/music/noteToAbc";
 
-type Clef =
+export type Clef =
     | "treble"
     | "bass";
 
-interface RangeNote {
+export interface RangeNote {
     note: string;
     clef: Clef;
     octava?: 1 | -1;

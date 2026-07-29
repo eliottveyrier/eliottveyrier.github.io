@@ -57,7 +57,7 @@ const instruments = await getCollection("instruments");
                             <li>
                                 {item.data.slug ? (
                                     <a
-                                        href={`/orchestration/instruments/${item.data.slug}`}
+                                        href={`/orchestration/instrument/${item.data.slug}`}
                                     >
                                         <span>
                                             {item.data.fullName ?? item.id}

@@ -17,9 +17,10 @@ stringTuning:
 import NoteSpan from "../../../components/mtheory/NoteSpan"
 import InstrumentTuningScore from "../../../components/InstrumentTuningScore"
 
-### Range and tuning
+import InstrumentSpecsCard from "../../../components/InstrumentSpecsCard"
+import YTVideoExample from "../../../components/YTVideoExample.astro"
 
-<InstrumentTuningScore
+<InstrumentSpecsCard
     client:only="preact"
     tuning={[
         "C3",
@@ -27,5 +28,102 @@ import InstrumentTuningScore from "../../../components/InstrumentTuningScore"
         "D4",
         "A4",
     ]}
-    clef="alto"
-/>
+    tuningClef="alto"
+
+    range="C3-E6"
+    comfortableRange="C3-C6"
+
+    rangeStart={{
+        note: "C3",
+        clef: "alto",
+    }}
+
+    comfortableTop={{
+        note: "E6",
+        clef: "treble",
+    }}
+
+    maxEnd={{
+        note: "A6",
+        clef: "treble",
+    }}
+>
+On a given string, two octaves is a good limit, with an octave and a fifth being a more comfortable range.
+</InstrumentSpecsCard>
+
+> Let us observe some differences between the viola and the violin, which should help define its function in the orchestra. 
+> 1. The viola bow is slightly heavier than that for the violin.
+> 2. The strings are thicker and more resistant to the bow, which necessitates a firmer stroke to produce a full sound. Lighter bowings are also possible but are more difficult to produce. 
+> 3. **Harmonics** are easier to play because the thicker strings produce them more reliably. 
+
+-- Samuel Adler, *The Study of Orchestration*
+
+<YTVideoExample
+    id="eU1pCog434Q"
+    startTime={207}
+>
+Figures de Notes - Alto
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="08SepkBc3QY"
+    startTime={48}
+>
+
+**Pizz.** in *A Midsummer Night's Dream* — Felix Mendelssohn
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="mGlOMlpedLY"
+    startTime={71}
+>
+
+**Viola solo** in *The Poem of Ecstasy* - Alexander Scriabin 
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="H2iMwADNmRk"
+    startTime={10}
+>
+
+**Viola Solo** representing Sancho Panza, *Don Quixote* - Richard Strauss
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="-AwJVunm42w"
+    startTime={1208}
+>
+
+**Six solo violas**, *The rite of spring* - Igor Stranvinsky
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="MdN-9JAtCdo"
+>
+
+**Somber alto melody**, *Wozzeck* — Alban Berg
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="Q4NC4E5RXik"
+    startTime={225}
+>
+
+**Solo**, *Harold en Italie* — Hector Berlioz
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="fDIkzHjHRhI"
+    startTime={373}
+>
+
+**Staccato**, *Die Meistersinger von Nürnberg* — Richard Wagner
+
+</YTVideoExample>

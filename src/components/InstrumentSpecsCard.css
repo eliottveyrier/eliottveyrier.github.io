@@ -1,0 +1,166 @@
+/* ============================================================ */
+/* Instrument Specs Card                                        */
+/* ============================================================ */
+
+.instrument-specs-card {
+    background: var(--surface);
+    margin-top: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    padding: 1.25rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.instrument-specs-card > h3 {
+    margin: 0;
+}
+
+
+/* ============================================================ */
+/* Scores                                                        */
+/* ============================================================ */
+
+.instrument-specs-scores {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 1rem;
+
+    align-items: stretch;
+}
+
+
+.instrument-specs-section {
+    display: flex;
+    flex-direction: column;
+
+    gap: .5rem;
+
+    min-height: 180px;
+}
+.instrument-range-score {
+    width: 50%;
+}
+
+
+.instrument-specs-section h4 {
+    margin: 0;
+
+    font-size: .8rem;
+    font-weight: 600;
+
+    color: var(--text-muted);
+
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+
+/*
+   ABCJS needs a real width because
+   responsive="resize" measures its container.
+*/
+
+.instrument-specs-card .abcjs-score {
+    width: 50%;
+    max-width: 320px;
+
+    margin: 0;
+    padding: .5rem;
+
+    box-shadow: none;
+}
+
+
+.instrument-specs-card .abcjs-score svg {
+    width: 100%;
+    height: auto;
+}
+
+
+/* ============================================================ */
+/* Details                                                       */
+/* ============================================================ */
+
+.instrument-specs-values {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(140px, 1fr));
+
+    gap: .75rem;
+
+    margin: 0;
+}
+
+
+.instrument-specs-values > div {
+    padding: .75rem 1rem;
+
+    background: var(--surface-light);
+
+    border: 1px solid var(--border);
+
+    border-radius:
+        calc(var(--radius) * .8);
+}
+
+
+.instrument-specs-values dt {
+    margin: 0;
+
+    font-size: .7rem;
+    font-weight: 600;
+
+    color: var(--text-muted);
+
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+
+.instrument-specs-values dd {
+    margin: .15rem 0 0;
+
+    color: var(--text);
+
+    font-weight: 600;
+}
+.range-separator {
+    display: inline-block;
+
+    margin: 0 .35rem;
+
+    color: var(--text-muted);
+}
+
+
+/* ============================================================ */
+/* Responsive                                                    */
+/* ============================================================ */
+
+@media (max-width: 700px) {
+
+    .instrument-specs-scores {
+        grid-template-columns: 1fr;
+    }
+
+
+    .instrument-specs-section {
+        min-height: auto;
+    }
+
+
+    .instrument-specs-card .abcjs-score {
+        max-width: 100%;
+    }
+
+}
