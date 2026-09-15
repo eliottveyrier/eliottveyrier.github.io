@@ -15,6 +15,7 @@ stringTuning:
 ---
 import NoteSpan from "../../../components/mtheory/NoteSpan"
 import InstrumentSpecsCard from "../../../components/InstrumentSpecsCard"
+import YTVideoExample from "../../../components/YTVideoExample.astro"
 
 <InstrumentSpecsCard
     client:only="preact"
@@ -34,20 +35,48 @@ import InstrumentSpecsCard from "../../../components/InstrumentSpecsCard"
         clef: "bass",
     }}
 
-    comfortableTop={{
-        note: "F5",
-        clef: "tenor",
-    }}
-
     maxEnd={{
-        note: "A5",
+        note: "G5",
         clef: "treble",
     }}
 >
-The practical range of the cello in an orchestra ranges from <NoteSpan note="C2" /> up to <NoteSpan note="A5" />.
+The cello ranges from <NoteSpan note="C2" /> up to <NoteSpan note="G5" />. With harmonics it can go up to <NoteSpan note="E6" />.
 
-The cello uses bass clef in its lower register, tenor clef in the middle register, and treble clef for high passages.
-
-The comfortable orchestral range extends roughly to <NoteSpan note="F5" />, while advanced repertoire can reach considerably higher.
 
 </InstrumentSpecsCard>
+
+<YTVideoExample
+    id="5cLh7bRY-Rk"
+    startTime={136}
+>
+
+*Tristan und Isolde* — Richard Wagner
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="kOXMym9VMBM"
+    startTime={5}
+>
+
+*Symphony No. 3* - Roy Harris
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="y9DqAfK3lfI"
+    startTime={4}
+>
+
+**5 celli solo** *William Tell Overture* - Gioachino Rossini
+
+</YTVideoExample>
+
+<YTVideoExample
+    id="KUFpcPEcwTo"
+    startTime={4}
+>
+
+*La Mer* - Claude Debussy
+
+</YTVideoExample>
